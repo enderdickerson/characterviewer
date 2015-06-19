@@ -22,7 +22,7 @@ var options = {
 	}
 };
 
-var mongodbUri = 'mongodb://heroku_0v452dxd:s0ep9k9cr7s1a46l04ql20qrh4@ds047722.mongolab.com:47722/heroku_0v452dxd';
+var mongodbUri = process.env.MONGOLAB_URI;
 var mongooseUri = uriUtil.formatMongoose(mongodbUri);
 
 mongoose.connect(mongooseUri, options);

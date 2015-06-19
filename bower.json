@@ -1,0 +1,6 @@
+{
+  "name": "tcg",
+  "dependencies": {
+    "angular-material": "~0.10.0"
+  }
+}

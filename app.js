@@ -5,43 +5,73 @@
 require('newrelic');
 var express = require('express');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/local');
+var uriUtil = require('mongodb-uri');
 
-require('./models/cards');
-var routes = require('./routes');
-var user = require('./routes/user');
-var http = require('http');
-var path = require('path');
+var options = {
+	server: {
+		socketOptions: {
+			keepAlive: 1,
+			connectTimeoutMS: 30000
+		}
+	},
+	replset: {
+		socketOptions: {
+			keepAlive: 1,
+			connectTimeoutMS: 30000
+		}
+	}
+};
 
+var mongodbUri = 'mongodb://heroku_0v452dxd:s0ep9k9cr7s1a46l04ql20qrh4@ds047722.mongolab.com:47722/heroku_0v452dxd';
+var mongooseUri = uriUtil.formatMongoose(mongodbUri);
 
-var app = express();
+mongoose.connect(mongooseUri, options);
+var conn = mongoose.connection;
 
-// all environments
-app.set('port', process.env.PORT || 3000);
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-app.use(express.favicon());
-app.use(express.logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(express.methodOverride());
-app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
+conn.on('error', console.error.bind(console, 'connection error:'));
 
-
-
-// development only
-if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
-}
-
-app.param('card', routes.card);
-app.get('/', routes.index);
-app.get('/cards', routes.getcards);
-app.post('/cards', routes.addcard);
-app.get('/cards/:card', routes.getcard);
-app.get('/users', user.list);
-
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+conn.once('open', function() {
+	startApp();
 });
+
+function startApp() {
+	require('./models/cards');
+	var routes = require('./routes');
+	var user = require('./routes/user');
+	var http = require('http');
+	var path = require('path');
+
+
+	var app = express();
+
+	// all environments
+	app.set('port', process.env.PORT || 3000);
+	app.set('views', path.join(__dirname, 'views'));
+	app.set('view engine', 'ejs');
+	app.use(express.favicon());
+	app.use(express.logger('dev'));
+	app.use(express.json());
+	app.use(express.urlencoded());
+	app.use(express.methodOverride());
+	app.use(app.router);
+	app.use(express.static(path.join(__dirname, 'public')));
+
+
+
+	// development only
+	if ('development' == app.get('env')) {
+	  app.use(express.errorHandler());
+	}
+
+	app.param('card', routes.card);
+	app.get('/', routes.index);
+	app.get('/cards', routes.getcards);
+	app.post('/cards', routes.addcard);
+	app.get('/cards/:card', routes.getcard);
+	app.get('/users', user.list);
+
+
+	http.createServer(app).listen(app.get('port'), function(){
+	  console.log('Express server listening on port ' + app.get('port'));
+	});
+};

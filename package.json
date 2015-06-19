@@ -8,6 +8,7 @@
   "dependencies": {
     "ejs": "*",
     "express": "3.4.7",
+    "mongodb-uri": "^0.9.7",
     "mongoose": "^4.0.5",
     "newrelic": "^1.20.1"
   }

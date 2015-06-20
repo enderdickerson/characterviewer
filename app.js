@@ -23,8 +23,8 @@ var options = {
 	}
 };
 
-var mongodbUri = config.db();
-
+// var mongodbUri = config.db();
+var mongodbUri = process.env.MONGOLAB_URI;
 var mongooseUri = uriUtil.formatMongoose(mongodbUri);
 
 mongoose.connect(mongooseUri, options);

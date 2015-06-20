@@ -6,6 +6,7 @@ require('newrelic');
 var express = require('express');
 var mongoose = require('mongoose');
 var uriUtil = require('mongodb-uri');
+var config = require('./config')
 
 var options = {
 	server: {
@@ -22,7 +23,8 @@ var options = {
 	}
 };
 
-var mongodbUri = process.env.MONGOLAB_URI;
+var mongodbUri = config.db();
+
 var mongooseUri = uriUtil.formatMongoose(mongodbUri);
 
 mongoose.connect(mongooseUri, options);

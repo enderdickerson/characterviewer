@@ -11,5 +11,12 @@
     "mongodb-uri": "^0.9.7",
     "mongoose": "^4.0.5",
     "newrelic": "^1.20.1"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.11.2",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-env": "^0.4.4",
+    "grunt-nodemon": "^0.4.0"
   }
 }

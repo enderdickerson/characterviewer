@@ -1,8 +1,4 @@
 module.exports = function(grunt) {
-
-grunt.loadNpmTasks('grunt-env');
-grunt.loadNpmTasks('grunt-nodemon');
-
 grunt.initConfig({
   env : {
     dev : {
@@ -22,8 +18,29 @@ grunt.initConfig({
         }
       }
     }
-  }
+  },
+  stylus: {
+    compile: {
+      options: {
+        paths: ['public/stylesheets/*.styl']
+      },
+      files: {
+        'public/stylesheets/site.css': ['public/stylesheets/*.styl']
+      }
+    }
+  },
+  watch: {
+    stylus: {
+      files: ['public/stylesheets/*.styl'],
+      tasks: ['stylus:compile']
+    },
+  },
 });
+
+grunt.loadNpmTasks('grunt-env');
+grunt.loadNpmTasks('grunt-nodemon');
+grunt.loadNpmTasks('grunt-contrib-stylus');
+grunt.loadNpmTasks('grunt-contrib-watch');
 
 grunt.registerTask('dev', ['env:dev', 'nodemon']);
 grunt.registerTask('local', ['env:local', 'nodemon']);

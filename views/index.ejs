@@ -4,24 +4,43 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/javascripts/angular-material/angular-material.css' />
     <link rel='stylesheet' href='/stylesheets/site.css' />
+    <base href="/">
   </head>
   <body layout="column" ng-controller="AppCtrl">
-    <md-toolbar class="md-accent" layout="row">
+    <md-toolbar layout="row">
       <div class="md-toolbar-tools">
-        <md-button ng-click="toggleSidenav('left')" hide-gt-sm class="md-icon-button">
-          <md-icon aria-label="Menu" md-svg-icon="https://s3-us-west-2.amazonaws.com/s.cdpn.io/68133/menu.svg"></md-icon>
+        <md-button ng-click="toggleLeft()" class="md-icon-button">
+          <md-icon aria-label="Menu" class="material-icons">menu</md-icon>
         </md-button>
-        <h1>Hello World</h1>
+        <h1>TCG</h1>
       </div>
     </md-toolbar>
+    <div layout="row" flex>
+      <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
+        <md-toolbar class="md-accent">
+          <h1 class="md-toolbar-tools">TCG</h1>
+        </md-toolbar>
+        <md-content layout-padding>
+          <md-button ui-sref="createcard">
+            Create Card
+          </md-button>
+        </md-content>
+      </md-sidenav>
+      <div layout="column" flex id="content">
+        <md-content layout="column" flex class="md-padding">
+          <div ui-view></div>
+        </md-content>
+      </div>
+    </div>
 
-    <!--<script src='/javascripts/app/main.js'></script>-->
     <script src='/javascripts/angular/angular.js'></script>
     <script src='/javascripts/angular-animate/angular-animate.js'></script>
     <script src='/javascripts/angular-aria/angular-aria.js'> </script>
     <script src='/javascripts/angular-material/angular-material.js'></script>
+    <script src='/javascripts/angular-ui-router/release/angular-ui-router.js'></script>
     <script src='/javascripts/app/game.js'></script>
-    <script src='/javascripts/app/appctrl.js'></script>
+    <script src='/javascripts/app/controllers/appctrl.js'></script>
+    <script src='/javascripts/app/controllers/cardctrl.js'></script>
     <script src='/javascripts/app/app.js'></script>
   </body>
 </html>

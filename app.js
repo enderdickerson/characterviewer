@@ -54,23 +54,27 @@ function startApp() {
 	app.use(express.json());
 	app.use(express.urlencoded());
 	app.use(express.methodOverride());
-	app.use(app.router);
+
 	app.use(express.static(path.join(__dirname, 'public')));
 
+	app.use(app.router);
 
+
+	// app.use('/public/javascripts', express.static('/public/javascripts'));
 
 	// development only
 	if ('development' == app.get('env')) {
 	  app.use(express.errorHandler());
 	}
 
+	// app.get('/*', routes.index);
 	app.param('card', routes.card);
 	app.get('/', routes.index);
-	app.get('/cards', routes.getcards);
-	app.post('/cards', routes.addcard);
-	app.get('/cards/:card', routes.getcard);
-	app.get('/users', user.list);
-
+	app.get('/data/cards', routes.getcards);
+	app.post('/data/cards', routes.addcard);
+	app.get('/data/cards/:card', routes.getcard);
+	app.get('/data/users', user.list);
+	app.get('/*', routes.index);
 
 	http.createServer(app).listen(app.get('port'), function(){
 	  console.log('Express server listening on port ' + app.get('port'));

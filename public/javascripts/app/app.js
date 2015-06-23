@@ -23,7 +23,8 @@ angular.module('tcgApp')
     })
     .state('viewcards', {
       url: '/cardlist',
-      templateUrl: 'partials/cards.html'
+      templateUrl: 'partials/cards.html',
+      controller: 'CardListCtrl'
     })
     .state('createcard', {
       url: '/card/create',

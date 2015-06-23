@@ -1,1 +1,13 @@
-<h2>This is the cards page</h2>
+<md-content>
+  <md-list>
+    <!-- <md-subheader class="md-no-sticky">{{ deck.name }}</md-subheader> -->
+    <md-list-item class="md-3-line" ng-repeat="card in cards">
+      <!-- <img class="md-avatar" alt="{{ item.name }}" /> -->
+      <div class="md-list-item-text">
+        <h3>{{ card.name }}</h3>
+        <h4>{{ card.strength }}</h4>
+        <p>{{ card.ability }}</p>
+      </div>
+    </md-list-item>
+  </md-list>
+</md-content>

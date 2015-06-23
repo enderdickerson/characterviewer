@@ -1,5 +1,5 @@
 angular
-  .module('tcgApp', ['ngMaterial', 'ndGame', 'ui.router'])
+  .module('tcgApp', ['ngMaterial', 'ndGame', 'ui.router', 'ngMessages'])
   .config(function($mdThemingProvider){
     $mdThemingProvider.theme('default')
         .primaryPalette('indigo')

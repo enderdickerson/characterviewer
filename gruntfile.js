@@ -35,12 +35,19 @@ grunt.initConfig({
       tasks: ['stylus:compile']
     },
   },
+  wiredep: {
+    target: {
+      src: 'views/index.ejs',
+      ignorePath: '../public/'
+    }
+  }
 });
 
 grunt.loadNpmTasks('grunt-env');
 grunt.loadNpmTasks('grunt-nodemon');
 grunt.loadNpmTasks('grunt-contrib-stylus');
 grunt.loadNpmTasks('grunt-contrib-watch');
+grunt.loadNpmTasks('grunt-wiredep');
 
 grunt.registerTask('dev', ['env:dev', 'nodemon']);
 grunt.registerTask('local', ['env:local', 'nodemon']);

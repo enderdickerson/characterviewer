@@ -9,20 +9,30 @@
   <body layout="column" ng-controller="AppCtrl">
     <md-toolbar layout="row">
       <div class="md-toolbar-tools">
-        <md-button ng-click="toggleLeft()" class="md-icon-button">
+        <md-button ng-click="toggleLeft()" class="md-icon-button" hide-gt-md>
           <md-icon aria-label="Menu" class="material-icons">menu</md-icon>
         </md-button>
-        <h1>TCG</h1>
+        <h1 ui-sref="landing">TCG</h1>
       </div>
     </md-toolbar>
     <div layout="row" flex>
-      <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
-        <md-toolbar class="md-accent">
+      <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left"
+      md-is-locked-open="$mdMedia('gt-md')">
+        <md-toolbar class="md-accent" hide-gt-md>
           <h1 class="md-toolbar-tools">TCG</h1>
         </md-toolbar>
         <md-content layout-padding>
-          <md-button ui-sref="createcard">
-            Create Card
+          <md-button class="sidenav-link" ui-sref="createcard">
+            <div class="inset">
+              <md-icon>create</md-icon>
+              <span class="text">Create Card</span>
+            </div>
+          </md-button>
+          <md-button class="sidenav-link" ui-sref="viewcards">
+            <div class="inset">
+              <md-icon>assignment_ind</md-icon>
+              <span class="text">Cards</span>
+            </div>
           </md-button>
         </md-content>
       </md-sidenav>
@@ -33,11 +43,20 @@
       </div>
     </div>
 
-    <script src='/javascripts/angular/angular.js'></script>
+    <!-- bower:js -->
+    <script src='javascripts/angular/angular.js'></script>
+    <script src='javascripts/angular-animate/angular-animate.js'></script>
+    <script src='javascripts/angular-aria/angular-aria.js'></script>
+    <script src='javascripts/angular-material/angular-material.js'></script>
+    <script src='javascripts/angular-messages/angular-messages.js'></script>
+    <script src='javascripts/angular-ui-router/release/angular-ui-router.js'></script>
+    <!-- endbower -->
+
+    <!--<script src='/javascripts/angular/angular.js'></script>
     <script src='/javascripts/angular-animate/angular-animate.js'></script>
     <script src='/javascripts/angular-aria/angular-aria.js'> </script>
     <script src='/javascripts/angular-material/angular-material.js'></script>
-    <script src='/javascripts/angular-ui-router/release/angular-ui-router.js'></script>
+    <script src='/javascripts/angular-ui-router/release/angular-ui-router.js'></script>-->
     <script src='/javascripts/app/game.js'></script>
     <script src='/javascripts/app/controllers/appctrl.js'></script>
     <script src='/javascripts/app/controllers/cardctrl.js'></script>

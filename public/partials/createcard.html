@@ -1,14 +1,26 @@
 <md-content layout-padding layout="column" layout-sm="column">
-  <md-input-container>
-    <label>Name</label>
-    <input ng-model="card.name">
-  </md-input-container>
-  <md-input-container>
-    <label>Strength</label>
-    <input ng-model="card.strength">
-  </md-input-container>
-  <md-input-container>
-    <label>Ability</label>
-    <input ng-model="card.ability">
-  </md-input-container>
-</md-content>
+  <form name="cardForm">
+    <md-input-container>
+      <label>Title</label>
+      <input md-maxlength="30" required ng-model="card.title" name="title">
+      <div ng-messages="cardForm.title.$error" ng-show="cardForm.title.$touched">
+        <div ng-message="required">This is required.</div>
+        <div ng-message="md-maxlength">The title has to be less than 30 characters long.</div>
+      </div>
+    </md-input-container>
+    <md-input-container>
+      <label>Strength</label>
+      <input ng-model="card.strength">
+    </md-input-container>
+    <md-input-container>
+      <label>Ability</label>
+      <input ng-model="card.ability">
+    </md-input-container>
+  </md-content>
+</form>
+<section layout="row">
+  <md-button class="md-raised md-primary" aria-label="Create card">
+      <md-icon>save</md-icon>
+      <span style="vertical-align: middle; margin-left: 5px;">Save</span>
+  </md-button>
+</section>

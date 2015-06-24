@@ -34,13 +34,18 @@ exports.addability = function(req, res) {
 };
 
 exports.removeability = function(req, res) {
-  var id = mongoose.Types.ObjectId(req.body._id);
+  var ObjectId = mongoose.Types.ObjectId;
 
-  var conditions = { "ability._id": id };
+  var id = new ObjectId(req.body._id);
+
+  var conditions = { "ability": req.body._id };
   var update = { $set: { "ability": undefined } };
   var options = { multi: true };
 
   Card.update(conditions, update, options, function (err, numAffected) {
+    if (err) {
+      return res.json(err);
+    }
     res.json(numAffected);
   });
 

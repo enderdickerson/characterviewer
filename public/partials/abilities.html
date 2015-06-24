@@ -1,0 +1,11 @@
+<md-content>
+  <md-list>
+    <md-list-item class="md-3-line" ng-repeat="ability in abilities">
+      <div class="md-list-item-text">
+        <h3>{{ ability.name }}</h3>
+        <p>{{ ability.description }}</p>
+      </div>
+      <md-icon class="md-secondary" ng-click="remove(ability)" aria-label="Delete">delete</md-icon>
+    </md-list-item>
+  </md-list>
+</md-content>

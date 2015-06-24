@@ -11,5 +11,11 @@
         return response.data;
       });
     };
+
+    root.add = function(card) {
+      return $http.post('/data/cards', card).then(function(response) {
+        return response;
+      });
+    };
   }
 })();

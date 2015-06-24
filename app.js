@@ -37,11 +37,11 @@ conn.once('open', function() {
 
 function startApp() {
 	require('./models/cards');
+	require('./models/ability');
 	var routes = require('./routes');
 	var user = require('./routes/user');
 	var http = require('http');
 	var path = require('path');
-
 
 	var app = express();
 
@@ -59,7 +59,6 @@ function startApp() {
 
 	app.use(app.router);
 
-
 	// app.use('/public/javascripts', express.static('/public/javascripts'));
 
 	// development only
@@ -73,6 +72,9 @@ function startApp() {
 	app.get('/data/cards', routes.getcards);
 	app.post('/data/cards', routes.addcard);
 	app.get('/data/cards/:card', routes.getcard);
+	app.get('/data/abilities', routes.getabilities);
+	app.post('/data/abilities', routes.addability);
+	app.post('/data/abilities/remove', routes.removeability);
 	app.get('/data/users', user.list);
 	app.get('/*', routes.index);
 

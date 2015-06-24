@@ -1,26 +1,32 @@
 <md-content layout-padding layout="column" layout-sm="column">
   <form name="cardForm">
     <md-input-container>
-      <label>Title</label>
-      <input md-maxlength="30" required ng-model="card.title" name="title">
-      <div ng-messages="cardForm.title.$error" ng-show="cardForm.title.$touched">
+      <label>Name</label>
+      <input md-maxlength="20" required ng-model="card.name" name="name">
+      <div ng-messages="cardForm.name.$error" ng-show="cardForm.name.$touched">
         <div ng-message="required">This is required.</div>
-        <div ng-message="md-maxlength">The title has to be less than 30 characters long.</div>
+        <div ng-message="md-maxlength">The name has to be less than 20 characters long.</div>
       </div>
     </md-input-container>
     <md-input-container>
       <label>Strength</label>
-      <input ng-model="card.strength">
+      <input type="number" required ng-model="card.strength" name="strength" min="0" max="15">
+      <div ng-messages="cardForm.strength.$error" ng-show="cardForm.strength.$touched">
+        <div ng-message="required">This is required.</div>
+        <div ng-message="max">Can't be that powerful come on. Max is 15.</div>
+        <div ng-message="min">Can't be that weak. Min is 0.</div>
+      </div>
     </md-input-container>
     <md-input-container>
-      <label>Ability</label>
-      <input ng-model="card.ability">
+      <md-select name="ability" placeholder="Ability" ng-model="card.ability">
+        <md-option ng-repeat="ability in abilities" value="{{ ability._id }}">{{ ability.name }}</md-option>
+      </md-select>
     </md-input-container>
-  </md-content>
-</form>
+  </form>
+</md-content>
 <section layout="row">
-  <md-button class="md-raised md-primary" aria-label="Create card">
-      <md-icon>save</md-icon>
-      <span style="vertical-align: middle; margin-left: 5px;">Save</span>
+  <md-button class="md-raised md-primary" aria-label="Create card" ng-click="save()">
+    <md-icon>save</md-icon>
+    <span class="form-action">Save</span>
   </md-button>
 </section>

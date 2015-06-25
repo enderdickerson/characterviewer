@@ -18,8 +18,8 @@
       });
     };
 
-    root.remove = function(ability) {
-      return $http.post('/data/abilities/remove', ability).then(function(response) {
+    root.remove = function(id) {
+      return $http.post('/data/abilities/remove', {id: id} ).then(function(response) {
         return response;
       });
     };

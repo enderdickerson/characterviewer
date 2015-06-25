@@ -42,9 +42,9 @@ exports.addability = function(req, res, next) {
 exports.removeability = function(req, res) {
   var ObjectId = mongoose.Types.ObjectId;
 
-  var id = new ObjectId(req.body._id);
+  var id = new ObjectId(req.body.id);
 
-  var conditions = { "ability": req.body._id };
+  var conditions = { "ability": req.body.id };
   var update = { $set: { "ability": undefined } };
   var options = { multi: true };
 

@@ -19,22 +19,26 @@ angular.module('tcgApp')
   $stateProvider
     .state('landing', {
       url: '/',
-      templateUrl: 'partials/landing.html'
+      templateUrl: 'partials/landing.html',
+      data: { pageTitle: ''}
     })
     .state('admin', {
       url: '/admin',
       templateUrl: 'partials/admin.html',
-      controller: 'AdminCtrl'
+      controller: 'AdminCtrl',
+      data: { pageTitle: 'Admin'}
     })
     .state('viewcards', {
       url: '/cardlist',
       templateUrl: 'partials/cards.html',
-      controller: 'CardListCtrl'
+      controller: 'CardListCtrl',
+      data: { pageTitle: 'Cards'}
     })
     .state('viewabilities', {
       url: '/abilitylist',
       templateUrl: 'partials/abilities.html',
-      controller: 'AbilityListCtrl'
+      controller: 'AbilityListCtrl',
+      data: { pageTitle: 'Abilities'}
     })
     .state('editcard', {
       url: '/card/:cardId',
@@ -44,7 +48,8 @@ angular.module('tcgApp')
         data: ['$stateParams', 'CardService', function($stateParams, CardService) {
           return $stateParams.cardId ? CardService.get($stateParams.cardId) : {};
         }]
-      }
+      },
+      data: { pageTitle: 'Card detail'}
     })
     .state('editability', {
       url: '/ability/:abilityId',
@@ -54,11 +59,13 @@ angular.module('tcgApp')
         data: ['$stateParams', 'AbilityService', function($stateParams, AbilityService) {
           return $stateParams.abilityId ? AbilityService.get($stateParams.abilityId) : {};
         }]
-      }
+      },
+      data: { pageTitle: 'Ability detail'}
     })
     .state('404', {
       url: '/404',
-      templateUrl: 'partials/404.html'
+      templateUrl: 'partials/404.html',
+      data: { pageTitle: 'Page not found'}
     })
   });
 

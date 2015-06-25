@@ -18,7 +18,8 @@
         <md-button ng-click="toggleLeft()" class="md-icon-button" hide-gt-md>
           <md-icon aria-label="Menu" class="material-icons">menu</md-icon>
         </md-button>
-        <h1 ui-sref="landing">TCG</h1>
+        <h1 id="app_title" class="nd-accent" ui-sref="landing" hide-sm hide-md>TCG</h1>
+        <h1>{{ $state.current.data.pageTitle || '' }}</h1>
       </div>
     </md-toolbar>
     <div layout="row" flex>

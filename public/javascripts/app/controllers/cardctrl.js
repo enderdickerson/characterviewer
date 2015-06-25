@@ -1,18 +1,15 @@
 (function() {
   angular.module('ndGame')
   	.controller('CardCtrl', [
-  	'$scope', '$mdToast', 'AbilityService', 'CardService', 'Utils', CardCtrl
+  	'$scope', '$mdToast', '$state', 'AbilityService', 'CardService', 'Utils', 'data', CardCtrl
   ]);
 
-  function CardCtrl($scope, $mdToast, AbilityService, CardService, Utils) {
+  function CardCtrl($scope, $mdToast, $state, AbilityService, CardService, Utils, data) {
     var root = this;
 
-    $scope.card = {};
+    $scope.card = data || {};
 
-    root.reset = function() {
-      $scope.card = {};
-      $scope.cardForm.$setPristine();
-    }
+    $scope.canRemove = !!$scope.card._id;
 
     AbilityService.getAll().then(function(response) {
       $scope.abilities = response;
@@ -25,9 +22,18 @@
 
       CardService.add($scope.card).then(function(response) {
         Utils.toast('Card saved')
-        root.reset();
+        $state.go('viewcards');
       }, function(error) {
         Utils.toast('Could not save card')
+      });
+    }
+
+    $scope.remove = function() {
+      CardService.remove($scope.card._id).then(function(response) {
+        Utils.toast('card: ' + $scope.card.name + ' was removed')
+        $state.go('viewcards');
+      }, function(error) {
+        Utils.toast('card: ' + $scope.card.name + ' could not be removed')
       });
     }
   }

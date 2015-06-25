@@ -25,8 +25,13 @@
   </form>
 </md-content>
 <section layout="row">
-  <md-button class="md-raised md-primary" aria-label="Create card" ng-click="save()">
+  <md-button class="md-raised md-primary" aria-label="Save" ng-click="save()">
     <md-icon>save</md-icon>
     <span class="form-action">Save</span>
+  </md-button>
+  <md-button ng-if="canRemove" class="md-raised md-primary"
+    aria-label="Remove" ng-click="remove()">
+    <md-icon>delete</md-icon>
+    <span class="form-action">Delete</span>
   </md-button>
 </section>

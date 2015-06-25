@@ -21,6 +21,11 @@ angular.module('tcgApp')
       url: '/',
       templateUrl: 'partials/landing.html'
     })
+    .state('admin', {
+      url: '/admin',
+      templateUrl: 'partials/admin.html',
+      controller: 'AdminCtrl'
+    })
     .state('viewcards', {
       url: '/cardlist',
       templateUrl: 'partials/cards.html',
@@ -31,16 +36,16 @@ angular.module('tcgApp')
       templateUrl: 'partials/abilities.html',
       controller: 'AbilityListCtrl'
     })
-    .state('createcard', {
-      url: '/card/create',
-      templateUrl: 'partials/createcard.html',
-      controller: 'CardCtrl'
+    .state('editcard', {
+      url: '/card/:cardId',
+      templateUrl: 'partials/card.html',
+      controller: 'CardCtrl',
+      resolve: {
+        data: ['$stateParams', 'CardService', function($stateParams, CardService) {
+          return $stateParams.cardId ? CardService.get($stateParams.cardId) : {};
+        }]
+      }
     })
-    // .state('createability', {
-    //   url: '/ability/create',
-    //   templateUrl: 'partials/ability.html',
-    //   controller: 'AbilityCtrl'
-    // })
     .state('editability', {
       url: '/ability/:abilityId',
       templateUrl: 'partials/ability.html',

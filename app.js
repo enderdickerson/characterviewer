@@ -36,9 +36,11 @@ conn.once('open', function() {
 });
 
 function startApp() {
-	require('./models/cards');
+	require('./models/card');
 	require('./models/ability');
 	var routes = require('./routes');
+	var cardStore = require('./routes/cardstore');
+	var abilityStore = require('./routes/abilitystore');
 	var user = require('./routes/user');
 	var http = require('http');
 	var path = require('path');
@@ -67,17 +69,23 @@ function startApp() {
 	}
 
 	// app.get('/*', routes.index);
-	app.param('card', routes.card);
-	app.param('ability', routes.ability);
+	app.param('card', cardStore.card);
+	app.param('ability', abilityStore.ability);
+
 	app.get('/', routes.index);
-	app.get('/data/cards', routes.getcards);
-	app.post('/data/cards', routes.addcard);
-	app.get('/data/cards/:card', routes.getcard);
-	app.get('/data/abilities', routes.getabilities);
-	app.post('/data/ability', routes.addability);
-	app.get('/data/ability/:ability', routes.getability);
-	app.post('/data/abilities/remove', routes.removeability);
+
+	app.get('/data/cards', cardStore.getcards);
+	app.post('/data/card', cardStore.addcard);
+	app.post('/data/card/remove', cardStore.removecard);
+	app.get('/data/cards/:card', cardStore.getcard);
+
+	app.get('/data/abilities', abilityStore.getabilities);
+	app.post('/data/ability', abilityStore.addability);
+	app.post('/data/ability/remove', abilityStore.removeability);
+	app.get('/data/abilities/:ability', abilityStore.getability);
+
 	app.get('/data/users', user.list);
+
 	app.get('/*', routes.index);
 
 	http.createServer(app).listen(app.get('port'), function(){

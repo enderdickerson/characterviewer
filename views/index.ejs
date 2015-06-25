@@ -27,28 +27,10 @@
         <md-toolbar class="md-accent" hide-gt-md>
           <h1 class="md-toolbar-tools">TCG</h1>
         </md-toolbar>
-        <md-button class="sidenav-link" ui-sref="createcard" ng-click="toggleLeft()">
+        <md-button class="sidenav-link" ui-sref="admin" ng-click="toggleLeft()">
           <div class="inset">
-            <md-icon>create</md-icon>
-            <span class="text">Add Card</span>
-          </div>
-        </md-button>
-        <md-button class="sidenav-link" ui-sref="editability" ng-click="toggleLeft()">
-          <div class="inset">
-            <md-icon>blur_circular</md-icon>
-            <span class="text">Add Ability</span>
-          </div>
-        </md-button>
-        <md-button class="sidenav-link" ui-sref="viewcards" ng-click="toggleLeft()">
-          <div class="inset">
-            <md-icon>assignment_ind</md-icon>
-            <span class="text">Cards</span>
-          </div>
-        </md-button>
-        <md-button class="sidenav-link" ui-sref="viewabilities" ng-click="toggleLeft()">
-          <div class="inset">
-            <md-icon>blur_circular</md-icon>
-            <span class="text">Abilities</span>
+            <md-icon>build</md-icon>
+            <span class="text">Admin</span>
           </div>
         </md-button>
       </md-sidenav>
@@ -77,6 +59,7 @@
     <script src='/javascripts/app/controllers/appctrl.js'></script>
     <script src='/javascripts/app/controllers/cardctrl.js'></script>
     <script src='/javascripts/app/controllers/abilityctrl.js'></script>
+    <script src='/javascripts/app/controllers/adminctrl.js'></script>
     <script src='/javascripts/app/controllers/cardlistctrl.js'></script>
     <script src='/javascripts/app/controllers/abilitylistctrl.js'></script>
     <script src='/javascripts/app/services/cardservice.js'></script>

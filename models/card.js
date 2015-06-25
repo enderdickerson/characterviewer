@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var CardSchema = new mongoose.Schema({
   name: String,
-  strength: String,
+  strength: Number,
   ability: {type: mongoose.Schema.Types.ObjectId, ref: 'Ability'}
 });
 

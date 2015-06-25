@@ -13,8 +13,20 @@
     };
 
     root.add = function(card) {
-      return $http.post('/data/cards', card).then(function(response) {
+      return $http.post('/data/card', card).then(function(response) {
         return response;
+      });
+    };
+
+    root.remove = function(id) {
+      return $http.post('/data/card/remove', { id: id }).then(function(response) {
+        return response;
+      });
+    };
+
+    root.get = function(id) {
+      return $http.get('/data/cards/' + id).then(function(response) {
+        return response.data;
       });
     };
   }

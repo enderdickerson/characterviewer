@@ -19,13 +19,13 @@
     };
 
     root.remove = function(id) {
-      return $http.post('/data/abilities/remove', {id: id} ).then(function(response) {
+      return $http.post('/data/ability/remove', {id: id} ).then(function(response) {
         return response;
       });
     };
 
     root.get = function(id) {
-      return $http.get('/data/ability/' + id).then(function(response) {
+      return $http.get('/data/abilities/' + id).then(function(response) {
         return response.data;
       });
     };

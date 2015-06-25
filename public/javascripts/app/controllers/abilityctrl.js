@@ -1,10 +1,10 @@
 (function() {
   angular.module('ndGame')
   	.controller('AbilityCtrl', [
-  	'$scope', '$mdToast', 'AbilityService', 'Utils', AbilityCtrl
+  	'$scope', '$mdToast', '$stateParams', 'AbilityService', 'Utils', 'data', AbilityCtrl
   ]);
 
-  function AbilityCtrl($scope, $mdToast, AbilityService, Utils) {
+  function AbilityCtrl($scope, $mdToast, $stateParams, AbilityService, Utils, data) {
     var root = this;
 
     root.reset = function() {
@@ -12,7 +12,7 @@
       $scope.abilityForm.$setPristine();
     }
 
-    $scope.ability = {};
+    $scope.ability = data || {};
 
     $scope.save = function() {
       if ($scope.abilityForm.$invalid) {

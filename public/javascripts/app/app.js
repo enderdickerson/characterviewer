@@ -13,7 +13,7 @@ angular
 angular.module('tcgApp')
   .config(function($stateProvider, $urlRouterProvider) {
 
-  $urlRouterProvider.otherwise("/");
+  $urlRouterProvider.otherwise("/404");
 
   // Now set up the states
   $stateProvider
@@ -36,10 +36,24 @@ angular.module('tcgApp')
       templateUrl: 'partials/createcard.html',
       controller: 'CardCtrl'
     })
-    .state('createability', {
-      url: '/ability/create',
-      templateUrl: 'partials/createability.html',
-      controller: 'AbilityCtrl'
+    // .state('createability', {
+    //   url: '/ability/create',
+    //   templateUrl: 'partials/ability.html',
+    //   controller: 'AbilityCtrl'
+    // })
+    .state('editability', {
+      url: '/ability/:abilityId',
+      templateUrl: 'partials/ability.html',
+      controller: 'AbilityCtrl',
+      resolve: {
+        data: ['$stateParams', 'AbilityService', function($stateParams, AbilityService) {
+          return $stateParams.abilityId ? AbilityService.get($stateParams.abilityId) : {};
+        }]
+      }
+    })
+    .state('404', {
+      url: '/404',
+      templateUrl: 'partials/404.html'
     })
   });
 
@@ -47,3 +61,8 @@ angular.module('tcgApp')
   .config(function($locationProvider) {
     $locationProvider.html5Mode(true);
   });
+
+angular.module('tcgApp')
+  .run(['$rootScope', '$state', function($rootScope, $state) {
+    $rootScope.$state = $state;
+  }]);

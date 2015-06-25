@@ -7,7 +7,7 @@ exports.index = function(req, res){
   res.render('index', { title: 'Express' });
 };
 
-exports.getcards = function(req, res) {
+exports.getcards = function(req, res, next) {
   Card.find(function(err, cards){
     if(err){ return next(err); }
 
@@ -15,7 +15,7 @@ exports.getcards = function(req, res) {
   }).populate('ability');
 };
 
-exports.getabilities = function(req, res) {
+exports.getabilities = function(req, res, next) {
   Ability.find(function(err, abilities){
     if(err){ return next(err); }
 
@@ -23,13 +23,19 @@ exports.getabilities = function(req, res) {
   });
 };
 
-exports.addability = function(req, res) {
-  var ability = new Ability(req.body);
+exports.addability = function(req, res, next) {
+  var ability = new Ability(req.body).toObject();
 
-  ability.save(function(err, ability){
-    if(err){ return next(err); }
+  delete ability._id;
 
-    res.json(ability);
+  console.log(ability);
+
+  var query = { '_id': req.body._id || new mongoose.mongo.ObjectID() };
+
+  Ability.update(query, ability, { upsert:true }, function(err, doc){
+    if (err) return next(err);
+
+    return res.json(doc);
   });
 };
 
@@ -68,8 +74,24 @@ exports.addcard = function(req, res, next) {
   });
 };
 
+exports.ability = function(req, res, next, id) {
+  var query = Ability.findById(id);
+
+  query.exec(function (err, ability){
+    if (err) { return next(err); }
+    if (!ability) { return next(new Error('can\'t find ability')); }
+
+    req.ability = ability;
+    return next();
+  });
+};
+
+exports.getability = function(req, res) {
+  res.json(req.ability);
+}
+
 exports.card = function(req, res, next, id) {
-  var query = Card.findOne({ 'name': id });
+  var query = Card.findById(id);
 
   query.exec(function (err, card){
     if (err) { return next(err); }
@@ -81,5 +103,5 @@ exports.card = function(req, res, next, id) {
 };
 
 exports.getcard = function(req, res) {
-  res.json(req.post);
+  res.json(req.card);
 }

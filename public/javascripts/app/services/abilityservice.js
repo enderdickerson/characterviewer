@@ -13,7 +13,7 @@
     };
 
     root.add = function(ability) {
-      return $http.post('/data/abilities', ability).then(function(response) {
+      return $http.post('/data/ability', ability).then(function(response) {
         return response;
       });
     };
@@ -21,6 +21,12 @@
     root.remove = function(ability) {
       return $http.post('/data/abilities/remove', ability).then(function(response) {
         return response;
+      });
+    };
+
+    root.get = function(id) {
+      return $http.get('/data/ability/' + id).then(function(response) {
+        return response.data;
       });
     };
   }

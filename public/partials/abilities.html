@@ -1,11 +1,10 @@
 <md-content>
   <md-list>
-    <md-list-item class="md-3-line" ng-repeat="ability in abilities">
+    <md-list-item class="md-2-line" ng-repeat="ability in abilities" ng-click="$state.go('editability', { 'abilityId': ability._id })">
       <div class="md-list-item-text">
         <h3>{{ ability.name }}</h3>
         <p>{{ ability.description }}</p>
       </div>
-      <md-icon class="md-secondary" ng-click="remove(ability)" aria-label="Delete">delete</md-icon>
     </md-list-item>
   </md-list>
 </md-content>

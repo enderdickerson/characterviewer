@@ -68,12 +68,14 @@ function startApp() {
 
 	// app.get('/*', routes.index);
 	app.param('card', routes.card);
+	app.param('ability', routes.ability);
 	app.get('/', routes.index);
 	app.get('/data/cards', routes.getcards);
 	app.post('/data/cards', routes.addcard);
 	app.get('/data/cards/:card', routes.getcard);
 	app.get('/data/abilities', routes.getabilities);
-	app.post('/data/abilities', routes.addability);
+	app.post('/data/ability', routes.addability);
+	app.get('/data/ability/:ability', routes.getability);
 	app.post('/data/abilities/remove', routes.removeability);
 	app.get('/data/users', user.list);
 	app.get('/*', routes.index);

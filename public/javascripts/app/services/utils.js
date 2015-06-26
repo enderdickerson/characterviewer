@@ -15,5 +15,16 @@
           .hideDelay(3000)
       );
     };
+
+    root.simpleDialog = function(title, msg, actionText) {
+      $mdDialog.show(
+        $mdDialog.alert()
+          .parent(angular.element(document.body))
+          .title(title || 'Alert')
+          .content(msg)
+          .ariaLabel('Alert')
+          .ok(actionText || 'Ok')
+      );
+    };
   }
 })();

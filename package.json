@@ -9,9 +9,13 @@
     "bower": "^1.4.1",
     "ejs": "*",
     "express": "3.4.7",
+    "express-jwt": "^3.0.1",
+    "jsonwebtoken": "^5.0.2",
     "mongodb-uri": "^0.9.7",
     "mongoose": "^4.0.5",
-    "newrelic": "^1.20.1"
+    "newrelic": "^1.20.1",
+    "passport": "^0.2.2",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

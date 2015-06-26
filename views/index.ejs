@@ -25,8 +25,25 @@
     <div layout="row" flex>
       <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left"
       md-is-locked-open="$mdMedia('gt-md')">
-        <md-toolbar class="md-accent" hide-gt-md>
-          <h1 class="md-toolbar-tools">TCG</h1>
+        <md-toolbar class="md-accent">
+
+
+          <div layout layout="column">
+            <h1 class="md-toolbar-tools" hide-gt-md>TCG</h1>
+            <!-- <md-icon ng-show="Auth.isLoggedIn()" class="md-toolbar-tools material-icons secondary-text">person</md-icon> -->
+            <h3 ng-show="Auth.isLoggedIn()" class="md-toolbar-tools">
+                {{ Auth.currentUser() }}
+            </h3>
+            <md-button ng-show="Auth.isLoggedIn()" ng-click="Auth.logout()" class="md-primary md-toolbar-tools">logout</md-button>
+            <md-button ng-show="!Auth.isLoggedIn()" ng-click="toggleLeft()" class="md-primary md-toolbar-tools" ui-sref="login">
+              login
+            </md-button>
+            <md-button ng-show="!Auth.isLoggedIn()" ng-click="toggleLeft()" class="md-primary md-toolbar-tools" ui-sref="register">
+              register
+            </md-button>
+            <!-- <a ng-show="!Auth.isLoggedIn()" class="secondary-text" ui-sref="login">login</a>
+            <a ng-show="!Auth.isLoggedIn()" class="secondary-text" ui-sref="register">register</a> -->
+          </div>
         </md-toolbar>
         <md-button class="sidenav-link" ui-sref="admin" ng-click="toggleLeft()">
           <div class="inset">
@@ -63,8 +80,10 @@
     <script src='/javascripts/app/controllers/adminctrl.js'></script>
     <script src='/javascripts/app/controllers/cardlistctrl.js'></script>
     <script src='/javascripts/app/controllers/abilitylistctrl.js'></script>
+    <script src='/javascripts/app/controllers/authctrl.js'></script>
     <script src='/javascripts/app/services/cardservice.js'></script>
     <script src='/javascripts/app/services/abilityservice.js'></script>
+    <script src='/javascripts/app/services/auth.js'></script>
     <script src='/javascripts/app/services/utils.js'></script>
     <script src='/javascripts/app/app.js'></script>
   </body>

@@ -5,6 +5,7 @@
 require('newrelic');
 var express = require('express');
 var mongoose = require('mongoose');
+var passport = require('passport');
 var uriUtil = require('mongodb-uri');
 var config = require('./config')
 
@@ -38,6 +39,9 @@ conn.once('open', function() {
 function startApp() {
 	require('./models/card');
 	require('./models/ability');
+	require('./models/user');
+	require('./config/passport');
+
 	var routes = require('./routes');
 	var cardStore = require('./routes/cardstore');
 	var abilityStore = require('./routes/abilitystore');
@@ -59,6 +63,8 @@ function startApp() {
 
 	app.use(express.static(path.join(__dirname, 'public')));
 
+	app.use(passport.initialize());
+
 	app.use(app.router);
 
 	// app.use('/public/javascripts', express.static('/public/javascripts'));
@@ -68,6 +74,9 @@ function startApp() {
 	  app.use(express.errorHandler());
 	}
 
+	var jwt = require('express-jwt');
+	var auth = jwt({ secret: process.env.JWT_SECRET, userProperty: 'payload' });
+
 	// app.get('/*', routes.index);
 	app.param('card', cardStore.card);
 	app.param('ability', abilityStore.ability);
@@ -75,16 +84,17 @@ function startApp() {
 	app.get('/', routes.index);
 
 	app.get('/data/cards', cardStore.getcards);
-	app.post('/data/card', cardStore.addcard);
-	app.post('/data/card/remove', cardStore.removecard);
-	app.get('/data/cards/:card', cardStore.getcard);
+	app.post('/data/card', auth, cardStore.addcard);
+	app.post('/data/card/remove', auth, cardStore.removecard);
+	app.get('/data/cards/:card', auth, cardStore.getcard);
 
 	app.get('/data/abilities', abilityStore.getabilities);
-	app.post('/data/ability', abilityStore.addability);
-	app.post('/data/ability/remove', abilityStore.removeability);
-	app.get('/data/abilities/:ability', abilityStore.getability);
+	app.post('/data/ability', auth, abilityStore.addability);
+	app.post('/data/ability/remove', auth, abilityStore.removeability);
+	app.get('/data/abilities/:ability', auth, abilityStore.getability);
 
-	app.get('/data/users', user.list);
+	app.post('/data/register', user.register);
+	app.post('/data/login', user.login);
 
 	app.get('/*', routes.index);
 

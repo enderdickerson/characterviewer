@@ -5,7 +5,8 @@ grunt.initConfig({
       NODE_ENV : 'dev'
     },
     local : {
-      NODE_ENV : 'local'
+      NODE_ENV : 'local',
+      JWT_SECRET: '38C8E5FD577DEBC43B2EF0E4A7F0624F4C519890E839FCAEA817A1157FB19F45'
     }
   },
   nodemon: {

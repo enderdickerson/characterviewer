@@ -22,6 +22,26 @@ angular.module('tcgApp')
       templateUrl: 'partials/landing.html',
       data: { pageTitle: ''}
     })
+    .state('login', {
+      url: '/login',
+      templateUrl: 'partials/login.html',
+      controller: 'AuthCtrl',
+      onEnter: ['$state', 'Auth', function($state, Auth){
+        if(Auth.isLoggedIn()){
+          $state.go('landing');
+        }
+      }]
+    })
+    .state('register', {
+      url: '/register',
+      templateUrl: 'partials/register.html',
+      controller: 'AuthCtrl',
+      onEnter: ['$state', 'Auth', function($state, Auth){
+        if(Auth.isLoggedIn()){
+          $state.go('landing');
+        }
+      }]
+    })
     .state('admin', {
       url: '/admin',
       templateUrl: 'partials/admin.html',
@@ -75,6 +95,7 @@ angular.module('tcgApp')
   });
 
 angular.module('tcgApp')
-  .run(['$rootScope', '$state', function($rootScope, $state) {
+  .run(['$rootScope', '$state', 'Auth', function($rootScope, $state, Auth) {
     $rootScope.$state = $state;
+    $rootScope.Auth = Auth;
   }]);

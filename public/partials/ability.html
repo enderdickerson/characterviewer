@@ -2,7 +2,7 @@
   <form name="abilityForm">
     <md-input-container>
       <label>Name</label>
-      <input md-maxlength="20" required ng-model="ability.name" name="name">
+      <input autocapitalize="on" md-maxlength="60" required ng-model="ability.name" name="name">
       <div ng-messages="abilityForm.name.$error" ng-show="abilityForm.name.$touched">
         <div ng-message="required">This is required.</div>
         <div ng-message="md-maxlength">The name has to be less than 20 characters long.</div>
@@ -10,7 +10,7 @@
     </md-input-container>
     <md-input-container>
       <label>Description</label>
-      <input required md-maxlength="200" ng-model="ability.description" name="description">
+      <textarea autocapitalize="on" columns="1" required md-maxlength="200" ng-model="ability.description" name="description"></textarea>
       <div ng-messages="abilityForm.description.$error" ng-show="abilityForm.description.$touched">
         <div ng-message="required">This is required.</div>
         <div ng-message="md-maxlength">The description has to be less than 200 characters long.</div>

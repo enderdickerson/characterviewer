@@ -9,6 +9,27 @@
       url(../fonts/MaterialIcons-Regular.woff) format('woff'),
       url(../fonts/MaterialIcons-Regular.ttf) format('truetype')
 
+@font-face
+    font-family 'Roboto'
+    src url('Roboto-Thin.ttf') format('truetype')
+    font-weight 200
+    font-style normal
+
+@font-face
+    font-family 'Roboto'
+    src url('Roboto-Regular.ttf') format('truetype')
+    font-weight 400
+    font-style italic
+
+@font-face
+    font-family 'Roboto'
+    src url('Roboto-Medium.ttf') format('truetype')
+    font-weight 600
+    font-style normal
+
+body
+  font-family "Roboto", sans-serif
+
 .material-icons
   font-family 'Material Icons'
   font-weight normal
@@ -53,6 +74,8 @@
 .nd-red
   background #ff8a80
 
+black-secondary = rgba(0,0,0,0.54)
+
 .clickable
   cursor pointer
 
@@ -61,3 +84,10 @@
 
 #app_title
   margin-right 20px
+
+.list-text-avatar
+  margin-right 20px
+  color black-secondary
+
+.list-icon-avatar
+  font-size 40px

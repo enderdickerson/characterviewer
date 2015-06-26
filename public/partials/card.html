@@ -2,10 +2,10 @@
   <form name="cardForm">
     <md-input-container>
       <label>Name</label>
-      <input md-maxlength="20" required ng-model="card.name" name="name">
+      <input md-maxlength="60" required ng-model="card.name" name="name">
       <div ng-messages="cardForm.name.$error" ng-show="cardForm.name.$touched">
         <div ng-message="required">This is required.</div>
-        <div ng-message="md-maxlength">The name has to be less than 20 characters long.</div>
+        <div ng-message="md-maxlength">The name has to be less than 60 characters long.</div>
       </div>
     </md-input-container>
     <md-input-container>
@@ -17,11 +17,19 @@
         <div ng-message="min">Can't be that weak. Min is 0.</div>
       </div>
     </md-input-container>
-    <md-input-container>
-      <md-select name="ability" placeholder="Ability" ng-model="card.ability">
-        <md-option ng-repeat="ability in abilities" value="{{ ability._id }}">{{ ability.name }}</md-option>
-      </md-select>
-    </md-input-container>
+    <div layout layout-sm="column">
+      <md-input-container>
+        <md-select name="ability" placeholder="Ability" ng-model="card.ability">
+          <md-option ng-repeat="ability in abilities" value="{{ ability._id }}">{{ ability.name }}</md-option>
+        </md-select>
+      </md-input-container>
+      <span flex="5"></span>
+      <md-input-container>
+        <md-select name="type" placeholder="Type" ng-model="cardType">
+          <md-option ng-repeat="type in types" value="{{ type }}">{{ type }}</md-option>
+        </md-select>
+      </md-input-container>
+    </div>
   </form>
 </md-content>
 <section layout="row">

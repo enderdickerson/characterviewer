@@ -7,6 +7,13 @@
   function CardCtrl($scope, $mdToast, $state, AbilityService, CardService, Utils, data) {
     var root = this;
 
+    root.translateType = function() {
+      if (!$scope.cardType) return;
+
+      var type = $scope.cardType.toLowerCase();
+      $scope.card[type] = true;
+    };
+
     $scope.card = data || {};
 
     $scope.canRemove = !!$scope.card._id;
@@ -15,10 +22,18 @@
       $scope.abilities = response;
     });
 
+    $scope.types = [
+      "Hero",
+      "Special",
+      "Leader"
+    ];
+
     $scope.save = function() {
       if ($scope.cardForm.$invalid) {
         return;
       }
+
+      root.translateType();
 
       CardService.add($scope.card).then(function(response) {
         Utils.toast('Card saved')
@@ -30,10 +45,10 @@
 
     $scope.remove = function() {
       CardService.remove($scope.card._id).then(function(response) {
-        Utils.toast('card: ' + $scope.card.name + ' was removed')
+        Utils.toast('Card ' + $scope.card.name + ' was removed')
         $state.go('viewcards');
       }, function(error) {
-        Utils.toast('card: ' + $scope.card.name + ' could not be removed')
+        Utils.toast('Card ' + $scope.card.name + ' could not be removed')
       });
     }
   }

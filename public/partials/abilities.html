@@ -6,5 +6,9 @@
         <p>{{ ability.description }}</p>
       </div>
     </md-list-item>
+    <md-divider></md-divider>
+    <md-list-item ng-if="AuthToken.isAdmin()" ng-click="$state.go('editability')">
+      <p>Add new ability</p>
+    </md-list-item>
   </md-list>
 </md-content>

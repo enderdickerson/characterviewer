@@ -18,9 +18,9 @@
 
     $scope.adminMenu = [
       root.menuItem('Cards', 'viewcards', 'assignment_ind', 'nd-blue'),
-      root.menuItem('Abilities', 'viewabilities', 'blur_circular', 'nd-purple'),
-      root.menuItem('Add card', 'editcard', 'create', 'nd-red'),
-      root.menuItem('Add ability', 'editability', 'games', 'nd-green')
-    ]
+      root.menuItem('Abilities', 'viewabilities', 'blur_circular', 'nd-purple')
+      // root.menuItem('Add card', 'editcard', 'create', 'nd-red'),
+      // root.menuItem('Add ability', 'editability', 'games', 'nd-green')
+    ];
   }
 })();

@@ -27,6 +27,19 @@
       }
     };
 
+    root.roles = function() {
+      if (root.isLoggedIn()) {
+        var token = root.getToken();
+        var payload = JSON.parse($window.atob(token.split('.')[1]));
+
+        return payload.roles;
+      }
+    }
+
+    root.isAdmin = function() {
+      return root.roles().indexOf('admin') > -1;
+    };
+
     root.currentUser = function() {
       if (root.isLoggedIn()) {
         var token = root.getToken();

@@ -10,7 +10,10 @@
         </div>
         <h2 class="md-display-1 list-text-avatar">{{ card.strength }}</h2>
       </md-list-item>
-      <md-divider ></md-divider>
-  </span>
+      <md-divider></md-divider>
+    </span>
+    <md-list-item ng-if="AuthToken.isAdmin()" ng-click="$state.go('editcard')">
+      <p>Add new card</p>
+    </md-list-item>
   </md-list>
 </md-content>

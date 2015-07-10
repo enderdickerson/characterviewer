@@ -1,10 +1,10 @@
 (function() {
   angular.module('ndGame')
     .service('Utils', [
-      '$mdToast', Utils
+      '$mdToast', '$mdDialog', Utils
     ]);
 
-  function Utils($mdToast) {
+  function Utils($mdToast, $mdDialog) {
     var root = this;
 
     root.toast = function(msg) {

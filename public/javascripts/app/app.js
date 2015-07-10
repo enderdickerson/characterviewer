@@ -22,22 +22,12 @@ angular.module('tcgApp')
       templateUrl: 'partials/landing.html',
       data: { pageTitle: ''}
     })
-    .state('login', {
-      url: '/login',
-      templateUrl: 'partials/login.html',
-      controller: 'AuthCtrl',
-      onEnter: ['$state', 'Auth', function($state, Auth){
-        if(Auth.isLoggedIn()){
-          $state.go('landing');
-        }
-      }]
-    })
     .state('register', {
       url: '/register',
       templateUrl: 'partials/register.html',
       controller: 'AuthCtrl',
-      onEnter: ['$state', 'Auth', function($state, Auth){
-        if(Auth.isLoggedIn()){
+      onEnter: ['$state', 'AuthToken', function($state, AuthToken){
+        if(AuthToken.isLoggedIn()){
           $state.go('landing');
         }
       }]
@@ -95,7 +85,12 @@ angular.module('tcgApp')
   });
 
 angular.module('tcgApp')
-  .run(['$rootScope', '$state', 'Auth', function($rootScope, $state, Auth) {
+  .config(function($httpProvider) {
+    $httpProvider.interceptors.push("AuthInterceptor");
+  });
+
+angular.module('tcgApp')
+  .run(['$rootScope', '$state', 'AuthToken', function($rootScope, $state, AuthToken) {
     $rootScope.$state = $state;
-    $rootScope.Auth = Auth;
+    $rootScope.AuthToken = AuthToken;
   }]);

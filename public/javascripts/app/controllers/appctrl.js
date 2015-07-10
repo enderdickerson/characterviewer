@@ -1,10 +1,10 @@
 (function() {
   angular.module('ndGame')
   	.controller('AppCtrl', [
-  	'$mdSidenav', '$scope', '$mdUtil', '$log', AppCtrl
+  	'$mdSidenav', '$mdDialog', '$scope', '$rootScope', '$mdUtil', '_events', AppCtrl
   ]);
 
-  function AppCtrl($mdSidenav, $scope, $mdUtil, $log) {
+  function AppCtrl($mdSidenav, $mdDialog, $scope, $rootScope, $mdUtil, _events) {
     $scope.toggleLeft = buildToggler('left');
 
     function buildToggler(navID) {
@@ -14,5 +14,40 @@
           },300);
       return debounceFn;
     }
+
+    $scope.showUnauthorized = function() {
+      $mdDialog.show(
+        $mdDialog.alert()
+          .parent(angular.element(document.body))
+          .title('You can\'t do that')
+          .content('Not enough user power')
+          .ariaLabel('Alert insufficient roles')
+          .ok('Got it')
+      );
+    };
+
+    $scope.showLogin = function() {
+      $mdDialog.show({
+        controller: 'AuthCtrl',
+        templateUrl: 'partials/login.html',
+        parent: angular.element(document.body)
+      });
+    };
+
+    $scope.$on('$stateChangeSuccess', function(event, toState) {
+      $mdSidenav('left').close();
+    });
+
+    $rootScope.$on(_events.notAuthorized, function() {
+      $scope.showUnauthorized();
+    });
+
+    $rootScope.$on(_events.notAuthenticated, function() {
+      $scope.showLogin();
+    });
+
+    $rootScope.$on(_events.sessionTimeout, function() {
+      $scope.showLogin();
+    });
   }
 })();

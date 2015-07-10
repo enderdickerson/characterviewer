@@ -48,6 +48,8 @@ function startApp() {
 	var user = require('./routes/user');
 	var http = require('http');
 	var path = require('path');
+	var authenticate = require('./routes/auth');
+	var roles = require('./constants/roles');
 
 	var app = express();
 
@@ -83,14 +85,14 @@ function startApp() {
 
 	app.get('/', routes.index);
 
-	app.get('/data/cards', cardStore.getcards);
-	app.post('/data/card', auth, cardStore.addcard);
-	app.post('/data/card/remove', auth, cardStore.removecard);
+	app.get('/data/cards', auth, cardStore.getcards);
+	app.post('/data/card', auth, authenticate.roles(roles.admin), cardStore.addcard);
+	app.post('/data/card/remove', auth, authenticate.roles(roles.admin), cardStore.removecard);
 	app.get('/data/cards/:card', auth, cardStore.getcard);
 
-	app.get('/data/abilities', abilityStore.getabilities);
-	app.post('/data/ability', auth, abilityStore.addability);
-	app.post('/data/ability/remove', auth, abilityStore.removeability);
+	app.get('/data/abilities', auth, abilityStore.getabilities);
+	app.post('/data/ability', auth, authenticate.roles(roles.admin), abilityStore.addability);
+	app.post('/data/ability/remove', auth, authenticate.roles(roles.admin), abilityStore.removeability);
 	app.get('/data/abilities/:ability', auth, abilityStore.getability);
 
 	app.post('/data/register', user.register);

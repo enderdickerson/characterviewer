@@ -1,10 +1,10 @@
 (function() {
   angular.module('ndGame')
     .service('AbilityService', [
-      '$http', 'Auth', AbilityService
+      '$http', AbilityService
     ]);
 
-  function AbilityService($http, Auth) {
+  function AbilityService($http) {
     var root = this;
     root.getAll = function() {
       return $http.get('/data/abilities').then(function(response){
@@ -13,17 +13,13 @@
     };
 
     root.add = function(ability) {
-      return $http.post('/data/ability', ability, {
-        headers: {Authorization: 'Bearer '+ Auth.getToken()}
-      }).then(function(response) {
+      return $http.post('/data/ability', ability).then(function(response) {
         return response;
       });
     };
 
     root.remove = function(id) {
-      return $http.post('/data/ability/remove', {id: id}, {
-        headers: {Authorization: 'Bearer '+ Auth.getToken()}
-      }).then(function(response) {
+      return $http.post('/data/ability/remove', {id: id}).then(function(response) {
         return response;
       });
     };

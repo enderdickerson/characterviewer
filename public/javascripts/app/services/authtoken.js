@@ -1,10 +1,10 @@
 (function() {
   angular.module('ndGame')
-    .service('Auth', [
-      '$http', '$window', Auth
+    .service('AuthToken', [
+      '$window', AuthToken
     ]);
 
-  function Auth($http, $window) {
+  function AuthToken($window) {
     var root = this;
 
     root.saveToken = function (token) {
@@ -36,17 +36,9 @@
       }
     };
 
-    root.register = function(user) {
-      return $http.post('/data/register', user).then(function(response) {
-        root.saveToken(response.data.token);
-      });
-    };
-
-    root.login = function(user) {
-      return $http.post('/data/login', user).then(function(response) {
-          root.saveToken(response.data.token);
-      });
-    };
+    // root.header = {
+    //   headers: { Authorization: 'Bearer '+ root.getToken()}
+    // };
 
     root.logout = function(user) {
       $window.localStorage.removeItem('tcgdev-token');

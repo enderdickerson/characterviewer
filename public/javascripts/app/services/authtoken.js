@@ -37,6 +37,10 @@
     }
 
     root.isAdmin = function() {
+      if (!root.roles()){
+        return false;
+      }
+
       return root.roles().indexOf('admin') > -1;
     };
 

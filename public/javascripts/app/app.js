@@ -38,28 +38,33 @@ angular.module('tcgApp')
       controller: 'AdminCtrl',
       data: { pageTitle: 'Admin'}
     })
-    .state('viewcards', {
-      url: '/cardlist',
+    .state('cards', {
+      url: '/cards',
       templateUrl: 'partials/cards.html',
       controller: 'CardListCtrl',
       data: { pageTitle: 'Cards'}
     })
-    .state('viewabilities', {
-      url: '/abilitylist',
-      templateUrl: 'partials/abilities.html',
-      controller: 'AbilityListCtrl',
-      data: { pageTitle: 'Abilities'}
-    })
-    .state('editcard', {
-      url: '/card/:cardId',
-      templateUrl: 'partials/card.html',
-      controller: 'CardCtrl',
+    .state('cards.edit', {
+      url: '/:cardId',
+      views: {
+        'detail@cards': {
+          templateUrl: 'partials/card.html',
+          controller: 'CardCtrl'
+        }
+      },
+      // templateUrl: 'partials/card.html',
       resolve: {
         data: ['$stateParams', 'CardService', function($stateParams, CardService) {
           return $stateParams.cardId ? CardService.get($stateParams.cardId) : {};
         }]
       },
       data: { pageTitle: 'Card detail'}
+    })
+    .state('viewabilities', {
+      url: '/abilitylist',
+      templateUrl: 'partials/abilities.html',
+      controller: 'AbilityListCtrl',
+      data: { pageTitle: 'Abilities'}
     })
     .state('editability', {
       url: '/ability/:abilityId',

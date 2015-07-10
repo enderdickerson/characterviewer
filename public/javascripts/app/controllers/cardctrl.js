@@ -37,7 +37,7 @@
 
       CardService.add($scope.card).then(function(response) {
         Utils.toast('Card saved')
-        $state.go('viewcards');
+        $state.go('cards', null, { reload: true });
       }, function(error) {
         Utils.toast('Could not save card')
       });
@@ -46,7 +46,7 @@
     $scope.remove = function() {
       CardService.remove($scope.card._id).then(function(response) {
         Utils.toast('Card ' + $scope.card.name + ' was removed')
-        $state.go('viewcards');
+        $state.go('cards', null, { reload: true });
       }, function(error) {
         Utils.toast('Card ' + $scope.card.name + ' could not be removed')
       });

@@ -34,10 +34,6 @@
       });
     };
 
-    $scope.$on('$stateChangeSuccess', function(event, toState) {
-      $mdSidenav('left').close();
-    });
-
     $rootScope.$on(_events.notAuthorized, function() {
       $scope.showUnauthorized();
     });

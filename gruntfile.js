@@ -1,9 +1,6 @@
 module.exports = function(grunt) {
 grunt.initConfig({
   env : {
-    dev : {
-      NODE_ENV : 'dev'
-    },
     local : {
       NODE_ENV : 'local',
       JWT_SECRET: '38C8E5FD577DEBC43B2EF0E4A7F0624F4C519890E839FCAEA817A1157FB19F45'
@@ -50,6 +47,6 @@ grunt.loadNpmTasks('grunt-contrib-stylus');
 grunt.loadNpmTasks('grunt-contrib-watch');
 grunt.loadNpmTasks('grunt-wiredep');
 
-grunt.registerTask('dev', ['env:dev', 'nodemon']);
+grunt.registerTask('build', ['wiredep']);
 grunt.registerTask('local', ['env:local', 'nodemon']);
 };

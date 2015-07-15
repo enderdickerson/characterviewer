@@ -6,6 +6,9 @@
     "start": "node app.js",
     "postinstall": "bower install && grunt build"
   },
+  "engines": {
+    "node": "0.12.4"
+  },
   "dependencies": {
     "grunt": "^0.4.5",
     "grunt-wiredep": "^2.0.0",

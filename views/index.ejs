@@ -6,8 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <link rel='stylesheet' href='/javascripts/vendor/angular-material/angular-material.css' />
-    <link rel='stylesheet' href='/stylesheets/site.css' />
+
+    <!-- include: "type": "css", "files": "/css/*.css" -->
+
     <base href="/">
   </head>
   <body layout="column" ng-controller="AppCtrl">
@@ -34,31 +35,17 @@
     </div>
 
     <!-- bower:js -->
-    <script src='javascripts/vendor/angular/angular.js'></script>
-    <script src='javascripts/vendor/angular-animate/angular-animate.js'></script>
-    <script src='javascripts/vendor/angular-aria/angular-aria.js'></script>
-    <script src='javascripts/vendor/angular-material/angular-material.js'></script>
-    <script src='javascripts/vendor/angular-messages/angular-messages.js'></script>
-    <script src='javascripts/vendor/angular-ui-router/release/angular-ui-router.js'></script>
     <!-- endbower -->
 
-    <script src='/javascripts/app/game.js'></script>
-    <script src='/javascripts/app/controllers/appctrl.js'></script>
-    <script src='/javascripts/app/controllers/cardctrl.js'></script>
-    <script src='/javascripts/app/controllers/abilityctrl.js'></script>
-    <script src='/javascripts/app/controllers/adminctrl.js'></script>
-    <script src='/javascripts/app/controllers/cardlistctrl.js'></script>
-    <script src='/javascripts/app/controllers/abilitylistctrl.js'></script>
-    <script src='/javascripts/app/controllers/authctrl.js'></script>
-    <script src='/javascripts/app/controllers/ndnavctrl.js'></script>
-    <script src='/javascripts/app/directives/ndnav.js'></script>
-    <script src='/javascripts/app/services/cardservice.js'></script>
-    <script src='/javascripts/app/services/abilityservice.js'></script>
-    <script src='/javascripts/app/services/authservice.js'></script>
-    <script src='/javascripts/app/services/authtoken.js'></script>
-    <script src='/javascripts/app/services/authinterceptor.js'></script>
-    <script src='/javascripts/app/services/utils.js'></script>
-    <script src='/javascripts/app/services/_events.js'></script>
-    <script src='/javascripts/app/app.js'></script>
+    <!-- include: "type": "js", "files": "src/app/**/*.module.js" -->
+    <!-- include: "type": "js", "files": "src/app/**/*.config.js" -->
+    <!-- include: "type": "js", "files": "src/app/**/*.route.js" -->
+    <!-- include: "type": "js", "files": [
+    "src/app/**/*.js,
+    "!src/app/**/*.module.js",
+    "!src/app/**/*.config.js",
+    "!src/app/**/*.route.js",
+    "!src/app/**/*.spec.js"] -->
+    <!-- include: "type": "js", "files": "src/app/templates.js -->
   </body>
 </html>

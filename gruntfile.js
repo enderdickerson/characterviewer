@@ -1,52 +1,122 @@
 module.exports = function(grunt) {
-grunt.initConfig({
-  env : {
-    local : {
-      NODE_ENV : 'local',
-      JWT_SECRET: '38C8E5FD577DEBC43B2EF0E4A7F0624F4C519890E839FCAEA817A1157FB19F45'
-    }
-  },
-  nodemon: {
-    dev: {
-      script: 'app.js',
-      options: {
-        nodeArgs: ['--debug'],
-        env: {
-          PORT: '5455'
+  grunt.initConfig({
+    env : {
+      local : {
+        NODE_ENV : 'local',
+        JWT_SECRET: '38C8E5FD577DEBC43B2EF0E4A7F0624F4C519890E839FCAEA817A1157FB19F45'
+      }
+    },
+    nodemon: {
+      dev: {
+        script: 'app.js',
+        options: {
+          nodeArgs: ['--debug'],
+          env: {
+            PORT: '5455'
+          }
         }
       }
-    }
-  },
-  stylus: {
-    compile: {
+    },
+    ngAnnotate: {
       options: {
-        paths: ['public/stylesheets/*.styl']
+        singleQuotes: true
       },
-      files: {
-        'public/stylesheets/site.css': ['public/stylesheets/*.styl']
+      build: {
+        files: [
+          {
+            expand: true,
+            src: [
+              'public/src/app/**/*.module.js',
+              'public/src/app/**/*.config.js',
+              'public/src/app/**/*.route.js',
+              'public/src/app/**/*.js',
+              '!public/src/app/**/*.spec.js'
+            ]
+          }
+        ],
+        options: {
+          add: true,
+          remove: true
+        }
+      }
+    },
+    includeSource: {
+      dev: {
+        files: {
+          'views/index.ejs': 'views/index.ejs'
+        }
+      }
+    },
+    clean: {
+      build: ['public/css/*.css']
+    },
+    stylus: {
+      compile: {
+        options: {
+          'include css': true,
+          paths: [
+            'public/css/base',
+            'public/css/layout',
+            'public/css/pages',
+            'public/css/vendor',
+            'public/src/vendor'
+          ],
+          compress: false
+        },
+        files: {
+          'public/css/site.css': ['public/css/main.styl']
+        }
+      }
+    },
+    watch: {
+      stylus: {
+        files: ['public/stylesheets/*.styl'],
+        tasks: ['stylus:compile']
+      }
+    },
+    wiredep: {
+      target: {
+        src: 'views/index.ejs',
+        ignorePath: '../public/'
+      }
+    },
+    filerev: {
+      options: {
+        algorithm: 'sha1',
+        length: 7
+      },
+      css: {
+        src: 'public/css/site.css'
       }
     }
-  },
-  watch: {
-    stylus: {
-      files: ['public/stylesheets/*.styl'],
-      tasks: ['stylus:compile']
-    },
-  },
-  wiredep: {
-    target: {
-      src: 'views/index.ejs',
-      ignorePath: '../public/'
-    }
-  }
-});
+  });
 
-grunt.loadNpmTasks('grunt-env');
-grunt.loadNpmTasks('grunt-nodemon');
-grunt.loadNpmTasks('grunt-contrib-stylus');
-grunt.loadNpmTasks('grunt-contrib-watch');
-grunt.loadNpmTasks('grunt-wiredep');
+  grunt.loadNpmTasks('grunt-env');
+  grunt.loadNpmTasks('grunt-nodemon');
+  grunt.loadNpmTasks('grunt-contrib-stylus');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-wiredep');
+  grunt.loadNpmTasks('grunt-include-source');
+  grunt.loadNpmTasks('grunt-ng-annotate');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-filerev');
 
-grunt.registerTask('build', ['wiredep']);
-grunt.registerTask('local', ['env:local', 'nodemon']);
+  grunt.registerTask('build', [
+    'clean',
+    'stylus:compile',
+    'filerev',
+    'ngAnnotate:build',
+    'wiredep',
+    'includeSource:dev'
+  ]);
+
+  grunt.registerTask('local', [
+    'clean',
+    'env:local',
+    'stylus:compile',
+    'filerev',
+    'ngAnnotate:build',
+    'includeSource:dev',
+    'nodemon'
+  ]);
 };

@@ -1,8 +1,8 @@
 {
-  "name": "tcg",
+  "name": "wowviewer",
   "dependencies": {
-    "angular-material": "~0.10.0",
-    "angular-messages": "~1.4.1",
-    "angular-ui-router": "~0.2.15"
+    "angular-material": "1.0.5",
+    "angular-messages": "1.5.5",
+    "angular-ui-router": "0.2.18"
   }
 }

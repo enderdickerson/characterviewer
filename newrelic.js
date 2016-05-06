@@ -8,7 +8,7 @@ exports.config = {
   /**
    * Array of application names.
    */
-  app_name: ['tcgdev'],
+  app_name: ['wowviewer'],
   /**
    * Your New Relic license key.
    */

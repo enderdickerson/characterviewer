@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <title><% title %></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <!-- include: "type": "css", "files": "css/*.css" -->
+    <base href="/">
+  </head>
+  <body layout="column" ng-controller="AppCtrl">
+    <nd-toolbar></nd-toolbar>
+    <div layout="row" flex>
+      <nd-nav></nd-nav>
+      <div layout="column" flex id="content">
+        <md-content layout="column" flex class="md-padding">
+          <div ui-view></div>
+        </md-content>
+      </div>
+    </div>
+
+    <!-- bower:js -->
+    <!-- endbower -->
+
+    <!-- include: "type": "js", "files": "src/app/**/*.module.js" -->
+
+    <!-- include: "type": "js", "files": "src/app/**/*.config.js" -->
+
+    <!-- include: "type": "js", "files": "src/app/**/*.route.js" -->
+
+    <!-- include: "type": "js", "files": [
+    "src/app/**/*.js",
+    "!src/app/**/*.module.js",
+    "!src/app/**/*.config.js",
+    "!src/app/**/*.route.js",
+    "!src/app/**/*.spec.js"] -->
+
+    <!-- include: "type": "js", "files": "src/app/templates.js" -->
+  </body>
+</html>

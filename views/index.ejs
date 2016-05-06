@@ -1,29 +1,16 @@
 <!DOCTYPE html>
-<html ng-app="tcgApp">
+<html ng-app="app">
   <head>
-    <title><%= title %></title>
+    <title><% title %></title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <link rel='stylesheet' href='/javascripts/vendor/angular-material/angular-material.css' />
-    <link rel='stylesheet' href='/stylesheets/site.css' />
+    <link href="css/site.feabbed.css" rel="stylesheet" type="text/css">
     <base href="/">
   </head>
   <body layout="column" ng-controller="AppCtrl">
-    <md-toolbar layout="row">
-      <div class="md-toolbar-tools">
-        <md-button ng-click="toggleLeft()" class="md-icon-button">
-          <md-icon aria-label="Menu" class="material-icons">menu</md-icon>
-        </md-button>
-        <h1 id="app_title" class="nd-accent" ui-sref="landing">TCG</h1>
-        <h1>{{ $state.current.data.pageTitle || '' }}</h1>
-        <span flex></span>
-        <md-button ng-show="!AuthToken.isLoggedIn()" class="md-accent" ui-sref="register">
-          register
-        </md-button>
-      </div>
-    </md-toolbar>
+    <nd-toolbar></nd-toolbar>
     <div layout="row" flex>
       <nd-nav></nd-nav>
       <div layout="column" flex id="content">
@@ -34,31 +21,38 @@
     </div>
 
     <!-- bower:js -->
-    <script src='javascripts/vendor/angular/angular.js'></script>
-    <script src='javascripts/vendor/angular-animate/angular-animate.js'></script>
-    <script src='javascripts/vendor/angular-aria/angular-aria.js'></script>
-    <script src='javascripts/vendor/angular-material/angular-material.js'></script>
-    <script src='javascripts/vendor/angular-messages/angular-messages.js'></script>
-    <script src='javascripts/vendor/angular-ui-router/release/angular-ui-router.js'></script>
+    <script src="src/vendor/angular/angular.js"></script>
+    <script src="src/vendor/angular-animate/angular-animate.js"></script>
+    <script src="src/vendor/angular-aria/angular-aria.js"></script>
+    <script src="src/vendor/angular-messages/angular-messages.js"></script>
+    <script src="src/vendor/angular-material/angular-material.js"></script>
+    <script src="src/vendor/angular-ui-router/release/angular-ui-router.js"></script>
     <!-- endbower -->
 
-    <script src='/javascripts/app/game.js'></script>
-    <script src='/javascripts/app/controllers/appctrl.js'></script>
-    <script src='/javascripts/app/controllers/cardctrl.js'></script>
-    <script src='/javascripts/app/controllers/abilityctrl.js'></script>
-    <script src='/javascripts/app/controllers/adminctrl.js'></script>
-    <script src='/javascripts/app/controllers/cardlistctrl.js'></script>
-    <script src='/javascripts/app/controllers/abilitylistctrl.js'></script>
-    <script src='/javascripts/app/controllers/authctrl.js'></script>
-    <script src='/javascripts/app/controllers/ndnavctrl.js'></script>
-    <script src='/javascripts/app/directives/ndnav.js'></script>
-    <script src='/javascripts/app/services/cardservice.js'></script>
-    <script src='/javascripts/app/services/abilityservice.js'></script>
-    <script src='/javascripts/app/services/authservice.js'></script>
-    <script src='/javascripts/app/services/authtoken.js'></script>
-    <script src='/javascripts/app/services/authinterceptor.js'></script>
-    <script src='/javascripts/app/services/utils.js'></script>
-    <script src='/javascripts/app/services/_events.js'></script>
-    <script src='/javascripts/app/app.js'></script>
+    <script src="src/app/app.module.js"></script>
+    <script src="src/app/core/core.module.js"></script>
+    <script src="src/app/core/login/login.module.js"></script>
+
+    <script src="src/app/app.config.js"></script>
+    <script src="src/app/core/core.config.js"></script>
+
+    <script src="src/app/app.route.js"></script>
+    <script src="src/app/core/core.route.js"></script>
+    <script src="src/app/core/login/login.route.js"></script>
+
+    <script src="src/app/core/_events.js"></script>
+    <script src="src/app/core/adminctrl.js"></script>
+    <script src="src/app/core/appctrl.js"></script>
+    <script src="src/app/core/authinterceptor.js"></script>
+    <script src="src/app/core/authtoken.js"></script>
+    <script src="src/app/core/login/authctrl.js"></script>
+    <script src="src/app/core/login/authservice.js"></script>
+    <script src="src/app/core/ndnav.controller.js"></script>
+    <script src="src/app/core/ndnav.directive.js"></script>
+    <script src="src/app/core/ndtoolbar.directive.js"></script>
+    <script src="src/app/core/utils.js"></script>
+    <script src="src/app/templates.js"></script>
+
+    <script src="src/app/templates.js"></script>
   </body>
 </html>

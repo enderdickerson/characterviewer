@@ -1,0 +1,13 @@
+<md-toolbar layout="row">
+  <div class="md-toolbar-tools">
+    <md-button ng-click="toggleLeft()" class="md-icon-button">
+      <md-icon aria-label="Menu" class="material-icons">menu</md-icon>
+    </md-button>
+    <h1 id="app_title" class="nd-accent" ui-sref="landing">WoW Viewer</h1>
+    <h1>{{ $state.current.data.pageTitle || '' }}</h1>
+    <span flex></span>
+    <!--<md-button ng-show="!AuthToken.isLoggedIn()" class="md-accent" ui-sref="register">-->
+      <!--register-->
+    <!--</md-button>-->
+  </div>
+</md-toolbar>

@@ -7,7 +7,7 @@
     return {
       restrict: 'E',
       controller: 'NdNavCtrl',
-      templateUrl: 'core/ndnav.html',
+      templateUrl: 'core/ndnav',
       replace: true
     };
   }

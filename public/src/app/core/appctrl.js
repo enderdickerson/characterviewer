@@ -30,7 +30,7 @@
     $scope.showLogin = function() {
       $mdDialog.show({
         controller: 'AuthCtrl',
-        templateUrl: 'core/login.html',
+        templateUrl: 'core/login',
         parent: angular.element(document.body)
       });
     };

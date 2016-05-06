@@ -58,7 +58,7 @@ module.exports = function(grunt) {
     },
     includeSource: {
       options: {
-        basePath: 'public/src',
+        basePath: 'public',
         typeMappings: {
           'ejs': 'html'
         }
@@ -130,8 +130,8 @@ module.exports = function(grunt) {
     'filerev',
     'html2js',
     'ngAnnotate:build',
-    'wiredep',
-    'includeSource:dev'
+    'includeSource:dev',
+    'wiredep'
   ]);
 
   grunt.registerTask('local', [
@@ -142,6 +142,7 @@ module.exports = function(grunt) {
     'html2js',
     'ngAnnotate:build',
     'includeSource:dev',
+    'wiredep',
     'nodemon'
   ]);
 };

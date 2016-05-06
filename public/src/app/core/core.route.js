@@ -8,12 +8,12 @@
     $stateProvider
       .state('landing', {
         url: '/',
-        templateUrl: 'core/landing.html',
+        templateUrl: 'core/landing',
         data: { pageTitle: ''}
       })
       .state('register', {
         url: '/register',
-        templateUrl: 'core/register.html',
+        templateUrl: 'core/register',
         controller: 'AuthCtrl',
         onEnter: ['$state', 'AuthToken', function($state, AuthToken){
           if(AuthToken.isLoggedIn()){
@@ -23,7 +23,7 @@
       })
       .state('admin', {
         url: '/admin',
-        templateUrl: 'core/admin.html',
+        templateUrl: 'core/admin',
         controller: 'AdminCtrl',
         data: { pageTitle: 'Admin'}
       })
@@ -32,7 +32,7 @@
       })
       .state('error.pageNotFound', {
         url: '/404',
-        templateUrl: 'core/404.html',
+        templateUrl: 'core/404',
         data: { pageTitle: 'Page not found'}
       })
   }

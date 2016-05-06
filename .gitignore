@@ -1,6 +1,7 @@
 bower_components
 node_modules
-public/javascripts/vendor
+public/src/vendor
+public/css/*.css
 
 */.DS_Store
 */*/.DS_Store

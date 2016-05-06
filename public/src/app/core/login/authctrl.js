@@ -1,6 +1,6 @@
 (function() {
   angular
-    .module('app.core')
+    .module('app.core.login')
   	.controller('AuthCtrl', [
   	'$q', '$scope', '$state', '$mdDialog', 'AuthService', 'Utils', AuthCtrl
   ]);

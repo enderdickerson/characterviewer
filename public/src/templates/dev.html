@@ -10,44 +10,32 @@
     <base href="/">
   </head>
   <body layout="column" ng-controller="AppCtrl">
-  <md-toolbar layout="row">
-    <div class="md-toolbar-tools">
-      <md-button ng-click="toggleLeft()" class="md-icon-button">
-        <md-icon aria-label="Menu" class="material-icons">menu</md-icon>
-      </md-button>
-      <h1 id="app_title" class="nd-accent" ui-sref="landing">TCG</h1>
-      <h1>{{ $state.current.data.pageTitle || '' }}</h1>
-      <span flex></span>
-      <md-button ng-show="!AuthToken.isLoggedIn()" class="md-accent" ui-sref="register">
-        register
-      </md-button>
+    <nd-toolbar></nd-toolbar>
+    <div layout="row" flex>
+      <nd-nav></nd-nav>
+      <div layout="column" flex id="content">
+        <md-content layout="column" flex class="md-padding">
+          <div ui-view></div>
+        </md-content>
+      </div>
     </div>
-  </md-toolbar>
-  <div layout="row" flex>
-    <nd-nav></nd-nav>
-    <div layout="column" flex id="content">
-      <md-content layout="column" flex class="md-padding">
-        <div ui-view></div>
-      </md-content>
-    </div>
-  </div>
 
-  <!-- bower:js -->
-  <!-- endbower -->
+    <!-- bower:js -->
+    <!-- endbower -->
 
-  <!-- include: "type": "js", "files": "src/app/**/*.module.js" -->
+    <!-- include: "type": "js", "files": "src/app/**/*.module.js" -->
 
-  <!-- include: "type": "js", "files": "src/app/**/*.config.js" -->
+    <!-- include: "type": "js", "files": "src/app/**/*.config.js" -->
 
-  <!-- include: "type": "js", "files": "src/app/**/*.route.js" -->
+    <!-- include: "type": "js", "files": "src/app/**/*.route.js" -->
 
-  <!-- include: "type": "js", "files": [
-  "src/app/**/*.js",
-  "!src/app/**/*.module.js",
-  "!src/app/**/*.config.js",
-  "!src/app/**/*.route.js",
-  "!src/app/**/*.spec.js"] -->
+    <!-- include: "type": "js", "files": [
+    "src/app/**/*.js",
+    "!src/app/**/*.module.js",
+    "!src/app/**/*.config.js",
+    "!src/app/**/*.route.js",
+    "!src/app/**/*.spec.js"] -->
 
-  <!-- include: "type": "js", "files": "src/app/templates.js" -->
+    <!-- include: "type": "js", "files": "src/app/templates.js" -->
   </body>
 </html>

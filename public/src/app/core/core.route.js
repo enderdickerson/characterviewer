@@ -11,16 +11,6 @@
         templateUrl: 'core/landing',
         data: { pageTitle: ''}
       })
-      .state('register', {
-        url: '/register',
-        templateUrl: 'core/register',
-        controller: 'AuthCtrl',
-        onEnter: ['$state', 'AuthToken', function($state, AuthToken){
-          if(AuthToken.isLoggedIn()){
-            $state.go('landing');
-          }
-        }]
-      })
       .state('admin', {
         url: '/admin',
         templateUrl: 'core/admin',
@@ -32,7 +22,7 @@
       })
       .state('error.pageNotFound', {
         url: '/404',
-        templateUrl: 'core/404',
+        templateUrl: 'core/pagenotfound',
         data: { pageTitle: 'Page not found'}
       })
   }

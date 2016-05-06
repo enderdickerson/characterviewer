@@ -1,9 +1,4 @@
-angular.module('templates-main', ['core/404', 'core/admin', 'core/landing', 'core/login', 'core/ndnav', 'core/register']);
-
-angular.module("core/404", []).run(['$templateCache', function($templateCache) {
-  $templateCache.put("core/404",
-    "<md-content><h2>Oh uh. Page not found.</h2></md-content>");
-}]);
+angular.module('templates-main', ['core/admin', 'core/landing', 'core/login/login', 'core/login/register', 'core/ndnav', 'core/ndtoolbar', 'core/pagenotfound']);
 
 angular.module("core/admin", []).run(['$templateCache', function($templateCache) {
   $templateCache.put("core/admin",
@@ -15,17 +10,27 @@ angular.module("core/landing", []).run(['$templateCache', function($templateCach
     "<h2>This is the landing page</h2>");
 }]);
 
-angular.module("core/login", []).run(['$templateCache', function($templateCache) {
-  $templateCache.put("core/login",
+angular.module("core/login/login", []).run(['$templateCache', function($templateCache) {
+  $templateCache.put("core/login/login",
     "<md-dialog><form name=\"loginForm\"><md-toolbar><div class=\"md-toolbar-tools\"><h2>Please login to continue</h2><span flex></span><md-button class=\"md-icon-button\" ng-click=\"$mdDialog\"><md-icon aria-label=\"Close dialog\"></md-icon></md-button></div></md-toolbar><md-dialog-content><md-input-container><label>Username</label><input ng-model=\"user.username\" name=\"username\" required></md-input-container><md-input-container><label>Password</label><input type=\"password\" required ng-model=\"user.password\" name=\"password\"></md-input-container><p ng-if=\"error\">Incorrect username or password. Please try again.</p><div layout=\"row\"><md-button class=\"md-raised md-primary\" aria-label=\"Register\" ng-click=\"$state.go('register')\" flex><md-icon>person_add</md-icon><span class=\"form-action\">Sign up</span></md-button><md-button class=\"md-raised md-primary\" aria-label=\"Login\" ng-click=\"login()\" flex><md-icon>lock</md-icon><span class=\"form-action\">Login</span></md-button></div></md-dialog-content></form></md-dialog>");
+}]);
+
+angular.module("core/login/register", []).run(['$templateCache', function($templateCache) {
+  $templateCache.put("core/login/register",
+    "<md-content layout-padding layout=\"column\" layout-sm=\"column\"><form name=\"registerForm\"><md-input-container><label>Username</label><input md-maxlength=\"40\" required ng-model=\"user.username\" name=\"username\"><div ng-messages=\"registerForm.username.$error\" ng-show=\"registerForm.username.$touched\"><div ng-message=\"required\">This is required.</div><div ng-message=\"md-maxlength\">The name has to be less than 40 characters long.</div></div></md-input-container><md-input-container><label>Password</label><input type=\"password\" md-maxlength=\"40\" required ng-model=\"user.password\" name=\"password\"><div ng-messages=\"registerForm.password.$error\" ng-show=\"registerForm.password.$touched\"><div ng-message=\"required\">This is required.</div><div ng-message=\"md-maxlength\">The name has to be less than 40 characters long.</div></div></md-input-container></form></md-content><section layout=\"row\"><md-button class=\"md-raised md-primary\" aria-label=\"Register\" ng-click=\"register()\"><md-icon>person_add</md-icon><span class=\"form-action\">Register</span></md-button></section>");
 }]);
 
 angular.module("core/ndnav", []).run(['$templateCache', function($templateCache) {
   $templateCache.put("core/ndnav",
-    "<md-sidenav class=\"md-sidenav-left md-whiteframe-z2\" md-component-id=\"left\"><md-toolbar class=\"md-hue-3\"><div layout layout=\"column\"><h3 ng-show=\"AuthToken.isLoggedIn()\" class=\"md-toolbar-tools\">{{ AuthToken.currentUser() }}</h3><md-button ng-show=\"AuthToken.isLoggedIn()\" ng-click=\"AuthToken.logout()\" class=\"md-primary md-toolbar-tools\">logout</md-button><md-button ng-show=\"!AuthToken.isLoggedIn()\" ng-click=\"showLogin()\" class=\"md-primary md-toolbar-tools\">login</md-button></div></md-toolbar><md-button class=\"sidenav-link\" ui-sref=\"admin\" ui-sref-active=\"active\"><div class=\"inset\"><md-icon>build</md-icon><span class=\"text\">Admin</span></div></md-button></md-sidenav>");
+    "<md-sidenav class=\"md-sidenav-left md-whiteframe-z2\" md-component-id=\"left\"><md-toolbar class=\"md-hue-3\"><div layout layout=\"column\"></div></md-toolbar></md-sidenav>");
 }]);
 
-angular.module("core/register", []).run(['$templateCache', function($templateCache) {
-  $templateCache.put("core/register",
-    "<md-content layout-padding layout=\"column\" layout-sm=\"column\"><form name=\"registerForm\"><md-input-container><label>Username</label><input md-maxlength=\"40\" required ng-model=\"user.username\" name=\"username\"><div ng-messages=\"registerForm.username.$error\" ng-show=\"registerForm.username.$touched\"><div ng-message=\"required\">This is required.</div><div ng-message=\"md-maxlength\">The name has to be less than 40 characters long.</div></div></md-input-container><md-input-container><label>Password</label><input type=\"password\" md-maxlength=\"40\" required ng-model=\"user.password\" name=\"password\"><div ng-messages=\"registerForm.password.$error\" ng-show=\"registerForm.password.$touched\"><div ng-message=\"required\">This is required.</div><div ng-message=\"md-maxlength\">The name has to be less than 40 characters long.</div></div></md-input-container></form></md-content><section layout=\"row\"><md-button class=\"md-raised md-primary\" aria-label=\"Register\" ng-click=\"register()\"><md-icon>person_add</md-icon><span class=\"form-action\">Register</span></md-button></section>");
+angular.module("core/ndtoolbar", []).run(['$templateCache', function($templateCache) {
+  $templateCache.put("core/ndtoolbar",
+    "<md-toolbar layout=\"row\"><div class=\"md-toolbar-tools\"><md-button ng-click=\"toggleLeft()\" class=\"md-icon-button\"><md-icon aria-label=\"Menu\" class=\"material-icons\">menu</md-icon></md-button><h1 id=\"app_title\" class=\"nd-accent\" ui-sref=\"landing\">WoW Viewer</h1><h1>{{ $state.current.data.pageTitle || '' }}</h1><span flex></span></div></md-toolbar>");
+}]);
+
+angular.module("core/pagenotfound", []).run(['$templateCache', function($templateCache) {
+  $templateCache.put("core/pagenotfound",
+    "<md-content><h2>Oh uh. Page not found.</h2></md-content>");
 }]);

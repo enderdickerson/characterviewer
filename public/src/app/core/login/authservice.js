@@ -1,6 +1,6 @@
 (function() {
   angular
-    .module('app.core')
+    .module('app.core.login')
     .service('AuthService', [
       '$http', '$window', 'AuthToken', AuthService
     ]);

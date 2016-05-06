@@ -10,58 +10,49 @@
     <base href="/">
   </head>
   <body layout="column" ng-controller="AppCtrl">
-  <md-toolbar layout="row">
-    <div class="md-toolbar-tools">
-      <md-button ng-click="toggleLeft()" class="md-icon-button">
-        <md-icon aria-label="Menu" class="material-icons">menu</md-icon>
-      </md-button>
-      <h1 id="app_title" class="nd-accent" ui-sref="landing">TCG</h1>
-      <h1>{{ $state.current.data.pageTitle || '' }}</h1>
-      <span flex></span>
-      <md-button ng-show="!AuthToken.isLoggedIn()" class="md-accent" ui-sref="register">
-        register
-      </md-button>
+    <nd-toolbar></nd-toolbar>
+    <div layout="row" flex>
+      <nd-nav></nd-nav>
+      <div layout="column" flex id="content">
+        <md-content layout="column" flex class="md-padding">
+          <div ui-view></div>
+        </md-content>
+      </div>
     </div>
-  </md-toolbar>
-  <div layout="row" flex>
-    <nd-nav></nd-nav>
-    <div layout="column" flex id="content">
-      <md-content layout="column" flex class="md-padding">
-        <div ui-view></div>
-      </md-content>
-    </div>
-  </div>
 
-  <!-- bower:js -->
-  <script src="src/vendor/angular/angular.js"></script>
-  <script src="src/vendor/angular-animate/angular-animate.js"></script>
-  <script src="src/vendor/angular-aria/angular-aria.js"></script>
-  <script src="src/vendor/angular-messages/angular-messages.js"></script>
-  <script src="src/vendor/angular-material/angular-material.js"></script>
-  <script src="src/vendor/angular-ui-router/release/angular-ui-router.js"></script>
-  <!-- endbower -->
+    <!-- bower:js -->
+    <script src="src/vendor/angular/angular.js"></script>
+    <script src="src/vendor/angular-animate/angular-animate.js"></script>
+    <script src="src/vendor/angular-aria/angular-aria.js"></script>
+    <script src="src/vendor/angular-messages/angular-messages.js"></script>
+    <script src="src/vendor/angular-material/angular-material.js"></script>
+    <script src="src/vendor/angular-ui-router/release/angular-ui-router.js"></script>
+    <!-- endbower -->
 
-  <script src="src/app/app.module.js"></script>
-  <script src="src/app/core/core.module.js"></script>
+    <script src="src/app/app.module.js"></script>
+    <script src="src/app/core/core.module.js"></script>
+    <script src="src/app/core/login/login.module.js"></script>
 
-  <script src="src/app/app.config.js"></script>
-  <script src="src/app/core/core.config.js"></script>
+    <script src="src/app/app.config.js"></script>
+    <script src="src/app/core/core.config.js"></script>
 
-  <script src="src/app/app.route.js"></script>
-  <script src="src/app/core/core.route.js"></script>
+    <script src="src/app/app.route.js"></script>
+    <script src="src/app/core/core.route.js"></script>
+    <script src="src/app/core/login/login.route.js"></script>
 
-  <script src="src/app/core/_events.js"></script>
-  <script src="src/app/core/adminctrl.js"></script>
-  <script src="src/app/core/appctrl.js"></script>
-  <script src="src/app/core/authctrl.js"></script>
-  <script src="src/app/core/authinterceptor.js"></script>
-  <script src="src/app/core/authservice.js"></script>
-  <script src="src/app/core/authtoken.js"></script>
-  <script src="src/app/core/ndnav.directive..js"></script>
-  <script src="src/app/core/ndnavctrl.js"></script>
-  <script src="src/app/core/utils.js"></script>
-  <script src="src/app/templates.js"></script>
+    <script src="src/app/core/_events.js"></script>
+    <script src="src/app/core/adminctrl.js"></script>
+    <script src="src/app/core/appctrl.js"></script>
+    <script src="src/app/core/authinterceptor.js"></script>
+    <script src="src/app/core/authtoken.js"></script>
+    <script src="src/app/core/login/authctrl.js"></script>
+    <script src="src/app/core/login/authservice.js"></script>
+    <script src="src/app/core/ndnav.controller.js"></script>
+    <script src="src/app/core/ndnav.directive.js"></script>
+    <script src="src/app/core/ndtoolbar.directive.js"></script>
+    <script src="src/app/core/utils.js"></script>
+    <script src="src/app/templates.js"></script>
 
-  <script src="src/app/templates.js"></script>
+    <script src="src/app/templates.js"></script>
   </body>
 </html>

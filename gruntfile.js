@@ -40,10 +40,32 @@ module.exports = function(grunt) {
         }
       }
     },
+    html2js: {
+      options: {
+        rename: function(moduleName) {
+          return moduleName.replace('.html', '').toLowerCase();
+        },
+        base: 'public/src/app',
+        htmlmin: {
+          collapseWhitespace: true,
+          removeComments: true
+        }
+      },
+      main: {
+        src: ['public/src/app/**/*.html'],
+        dest: 'public/src/app/templates.js'
+      }
+    },
     includeSource: {
+      options: {
+        basePath: 'public/src',
+        typeMappings: {
+          'ejs': 'html'
+        }
+      },
       dev: {
         files: {
-          'views/index.ejs': 'views/index.ejs'
+          'views/index.ejs': 'public/src/templates/dev.html'
         }
       }
     },
@@ -100,11 +122,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-ng-annotate');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-filerev');
+  grunt.loadNpmTasks('grunt-html2js');
 
   grunt.registerTask('build', [
     'clean',
     'stylus:compile',
     'filerev',
+    'html2js',
     'ngAnnotate:build',
     'wiredep',
     'includeSource:dev'
@@ -115,6 +139,7 @@ module.exports = function(grunt) {
     'env:local',
     'stylus:compile',
     'filerev',
+    'html2js',
     'ngAnnotate:build',
     'includeSource:dev',
     'nodemon'

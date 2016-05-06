@@ -42,8 +42,8 @@ function startApp() {
 
 	// app.post('/data/card/remove', auth, authenticate.roles(roles.admin), cardStore.removecard);
 
-	app.post('/data/register', user.register);
-	app.post('/data/login', user.login);
+	// app.post('/data/register', user.register);
+	// app.post('/data/login', user.login);
 
 	app.get('/*', routes.index);
 

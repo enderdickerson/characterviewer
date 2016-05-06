@@ -1,4 +1,8 @@
 (function() {
+  interceptors.$inject = ['$httpProvider'];
+  urlProvider.$inject = ['$urlRouterProvider', '$locationProvider'];
+  normalizePath.$inject = ['$location'];
+  goToErrorPage.$inject = ['$injector'];
   angular
     .module('app')
     .config(urlProvider);

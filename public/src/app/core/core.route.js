@@ -1,4 +1,5 @@
 (function() {
+  stateConfig.$inject = ['$stateProvider'];
   angular
     .module('app.core')
     .config(stateConfig);
@@ -7,12 +8,12 @@
     $stateProvider
       .state('landing', {
         url: '/',
-        templateUrl: 'partials/landing.html',
+        templateUrl: 'core/landing.html',
         data: { pageTitle: ''}
       })
       .state('register', {
         url: '/register',
-        templateUrl: 'partials/register.html',
+        templateUrl: 'core/register.html',
         controller: 'AuthCtrl',
         onEnter: ['$state', 'AuthToken', function($state, AuthToken){
           if(AuthToken.isLoggedIn()){
@@ -22,7 +23,7 @@
       })
       .state('admin', {
         url: '/admin',
-        templateUrl: 'partials/admin.html',
+        templateUrl: 'core/admin.html',
         controller: 'AdminCtrl',
         data: { pageTitle: 'Admin'}
       })
@@ -31,7 +32,7 @@
       })
       .state('error.pageNotFound', {
         url: '/404',
-        templateUrl: 'partials/404.html',
+        templateUrl: 'core/404.html',
         data: { pageTitle: 'Page not found'}
       })
   }

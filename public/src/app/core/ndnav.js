@@ -1,14 +1,13 @@
 (function() {
-  angular.module('ndGame')
-  	.directive('ndNav', [
-      NdNav
-  ]);
+  angular
+    .module('app.core')
+  	.directive('ndNav', NdNav);
 
   function NdNav() {
     return {
       restrict: 'E',
       controller: 'NdNavCtrl',
-      templateUrl: '/partials/ndnav.html',
+      templateUrl: 'core/ndnav.html',
       replace: true
     };
   }

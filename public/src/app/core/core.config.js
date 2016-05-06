@@ -1,4 +1,5 @@
 (function() {
+  configMaterial.$inject = ['$mdThemingProvider'];
   angular
     .module('app.core')
     .config(configMaterial);

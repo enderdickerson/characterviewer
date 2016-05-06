@@ -1,4 +1,5 @@
 (function() {
+  runBlock.$inject = ['$rootScope', '$state', 'AuthToken'];
   angular
     .module('app')
     .run(runBlock);

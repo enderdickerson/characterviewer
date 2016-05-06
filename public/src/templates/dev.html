@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <link href="../css/site.feabbed.css" rel="stylesheet" type="text/css">
+    <!-- include: "type": "css", "files": "../css/*.css" -->
     <base href="/">
   </head>
   <body layout="column" ng-controller="AppCtrl">
@@ -35,27 +35,19 @@
   <!-- bower:js -->
   <!-- endbower -->
 
-  <script src="app/app.module.js"></script>
-  <script src="app/core/core.module.js"></script>
+  <!-- include: "type": "js", "files": "app/**/*.module.js" -->
 
-  <script src="app/app.config.js"></script>
-  <script src="app/core/core.config.js"></script>
+  <!-- include: "type": "js", "files": "app/**/*.config.js" -->
 
-  <script src="app/app.route.js"></script>
-  <script src="app/core/core.route.js"></script>
+  <!-- include: "type": "js", "files": "app/**/*.route.js" -->
 
-  <script src="app/core/_events.js"></script>
-  <script src="app/core/adminctrl.js"></script>
-  <script src="app/core/appctrl.js"></script>
-  <script src="app/core/authctrl.js"></script>
-  <script src="app/core/authinterceptor.js"></script>
-  <script src="app/core/authservice.js"></script>
-  <script src="app/core/authtoken.js"></script>
-  <script src="app/core/ndnav.js"></script>
-  <script src="app/core/ndnavctrl.js"></script>
-  <script src="app/core/utils.js"></script>
-  <script src="app/templates.js"></script>
+  <!-- include: "type": "js", "files": [
+  "app/**/*.js",
+  "!app/**/*.module.js",
+  "!app/**/*.config.js",
+  "!app/**/*.route.js",
+  "!app/**/*.spec.js"] -->
 
-  <script src="app/templates.js"></script>
+  <!-- include: "type": "js", "files": "app/templates.js" -->
   </body>
 </html>

@@ -4,6 +4,10 @@ module.exports = function(grunt) {
       local : {
         NODE_ENV : 'local',
         JWT_SECRET: '38C8E5FD577DEBC43B2EF0E4A7F0624F4C519890E839FCAEA817A1157FB19F45'
+      },
+      dev: {
+        NODE_ENV : 'dev',
+        JWT_SECRET: '38C8E5FD577DEBC43B2EF0E4A7F0624F4C519890E839FCAEA817A1157FB19F45'
       }
     },
     nodemon: {
@@ -137,6 +141,18 @@ module.exports = function(grunt) {
   grunt.registerTask('local', [
     'clean',
     'env:local',
+    'stylus:compile',
+    'filerev',
+    'html2js',
+    'ngAnnotate:build',
+    'includeSource:dev',
+    'wiredep',
+    'nodemon'
+  ]);
+
+  grunt.registerTask('dev', [
+    'clean',
+    'env:dev',
     'stylus:compile',
     'filerev',
     'html2js',

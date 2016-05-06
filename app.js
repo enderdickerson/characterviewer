@@ -2,8 +2,19 @@ require('newrelic');
 var express = require('express');
 var passport = require('passport');
 var config = require('./config');
+var mysql = require('mysql');
 
-startApp();
+var connection = mysql.createConnection(config.db());
+
+connection.connect(function(err) {
+  if (err) {
+    console.error('error connecting: ' + err.stack);
+    return;
+  }
+
+  console.log('starting: ', config.db());
+  startApp();
+});
 
 function startApp() {
 	var routes = require('./routes');

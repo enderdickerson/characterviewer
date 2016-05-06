@@ -7,7 +7,7 @@ angular.module("core/admin", []).run(['$templateCache', function($templateCache)
 
 angular.module("core/landing", []).run(['$templateCache', function($templateCache) {
   $templateCache.put("core/landing",
-    "<h2>This is the landing page</h2>");
+    "<h2>Who's online</h2>");
 }]);
 
 angular.module("core/login/login", []).run(['$templateCache', function($templateCache) {

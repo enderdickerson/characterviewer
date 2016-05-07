@@ -4,6 +4,8 @@ var passport = require('passport');
 var config = require('./config');
 var mysql = require('mysql');
 
+console.log(config.db());
+
 var connection = mysql.createConnection(config.db());
 
 connection.connect(function(err) {

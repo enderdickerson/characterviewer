@@ -2,27 +2,33 @@ require('newrelic');
 var express = require('express');
 var passport = require('passport');
 var config = require('./config');
-var mysql = require('mysql');
+var models = require('./models');
 
-console.log(config.db());
-
-var connection = mysql.createConnection(config.db());
-
-connection.connect(function(err) {
-  if (err) {
-    console.error('error connecting: ' + err.stack);
-    return;
-  }
-
-  console.log('starting: ', config.db());
+models.sequelize.sync().then(function() {
   startApp();
 });
+// var mysql = require('mysql');
+
+// console.log(config.db());
+
+// var connection = mysql.createConnection(config.db());
+
+// connection.connect(function(err) {
+//   if (err) {
+//     console.error('error connecting: ' + err.stack);
+//     return;
+//   }
+//
+//   console.log('starting: ', config.db());
+//   startApp();
+// });
 
 function startApp() {
 	var routes = require('./routes');
 	var http = require('http');
 	var path = require('path');
 	var roles = require('./constants/roles');
+  var characterStore = require('./routes/character');
 
 	var app = express();
 
@@ -42,7 +48,6 @@ function startApp() {
 
 	app.use(app.router);
 
-
 	// development only
 	if ('development' == app.get('env')) {
 	  app.use(express.errorHandler());
@@ -52,6 +57,8 @@ function startApp() {
 	var auth = jwt({ secret: process.env.JWT_SECRET, userProperty: 'payload' });
 
 	app.get('/', routes.index);
+
+  app.get('/data/characters', characterStore.all);
 
 	// app.post('/data/card/remove', auth, authenticate.roles(roles.admin), cardStore.removecard);
 

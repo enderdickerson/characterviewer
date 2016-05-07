@@ -1,30 +1,55 @@
 var schedule = require('node-schedule');
 var mysql = require('mysql');
 var config = require('../config.js');
-
-
+var models = require('../models');
 
 module.exports = function() {
-  console.log('schedule set');
   var j = schedule.scheduleJob('*/20 * * * * *', function() {
-    console.log('Accessing remote');
+    console.log('Running character update job');
     updateCharactersFromRemote();
   });
 };
 
 function updateCharactersFromRemote() {
-  var connection = mysql.createConnection(config.remote());
+  var remote = mysql.createConnection(config.remote());
 
-  connection.connect();
+  remote.connect();
 
-  connection.query('SELECT `name`, `online` FROM characters', function(err, rows) {
+  remote.query('SELECT `guid`, `name`, `online` FROM characters', function(err, rows) {
     if (err) {
       console.log(err);
       return;
     }
 
-    console.log('Remote results: ', JSON.stringify(rows));
+    createOrUpdateCharacters(rows)
   });
 
-  connection.end();
+  remote.end();
+}
+
+function createOrUpdateCharacter(characterFromRemote) {
+  return models.Character.findById(characterFromRemote.guid).then(function(character) {
+    if (!character) {
+      return models.Character.create({
+        name: characterFromRemote.name,
+        guid: characterFromRemote.guid,
+        online: characterFromRemote.online
+      });
+    }
+    else {
+      character.updateAttributes({
+        online: characterFromRemote.online
+      });
+    }
+  });
+}
+
+function createOrUpdateCharacters(charactersFromRemote) {
+  var promises = [];
+
+  charactersFromRemote.forEach(function(characterFromRemote) {
+    promises.push(createOrUpdateCharacter(characterFromRemote));
+  });
+
+  return models.Sequelize.Promise.all(promises);
 }

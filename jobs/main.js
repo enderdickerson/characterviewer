@@ -4,10 +4,12 @@ var config = require('../config.js');
 var models = require('../models');
 
 module.exports = function() {
-  var j = schedule.scheduleJob('*/20 * * * * *', function() {
-    console.log('Running character update job');
-    updateCharactersFromRemote();
-  });
+  if (process.env.NODE_ENV !== 'local') {
+    var j = schedule.scheduleJob('*/20 * * * * *', function() {
+      console.log('Running character update job');
+      updateCharactersFromRemote();
+    });
+  }
 };
 
 function updateCharactersFromRemote() {

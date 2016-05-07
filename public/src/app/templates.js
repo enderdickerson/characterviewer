@@ -1,4 +1,9 @@
-angular.module('templates-main', ['core/admin', 'core/landing', 'core/login/login', 'core/login/register', 'core/ndnav', 'core/ndtoolbar', 'core/pagenotfound']);
+angular.module('templates-main', ['characters/players', 'core/admin', 'core/landing', 'core/login/login', 'core/login/register', 'core/ndnav', 'core/ndtoolbar', 'core/pagenotfound']);
+
+angular.module("characters/players", []).run(['$templateCache', function($templateCache) {
+  $templateCache.put("characters/players",
+    "<div><div layout=\"row\"><h2>Who's Online</h2><span flex></span><md-button ng-click=\"vm.refresh()\" class=\"md-raised\">Refresh</md-button></div><md-list><md-list-item ng-repeat=\"character in vm.onlineCharacters\"><p ng-bind=\"character.name\"></p></md-list-item></md-list><h2>Who's Offline</h2><md-list><md-list-item ng-repeat=\"character in vm.offlineCharacters\"><p ng-bind=\"character.name\"></p></md-list-item></md-list></div>");
+}]);
 
 angular.module("core/admin", []).run(['$templateCache', function($templateCache) {
   $templateCache.put("core/admin",
@@ -7,7 +12,7 @@ angular.module("core/admin", []).run(['$templateCache', function($templateCache)
 
 angular.module("core/landing", []).run(['$templateCache', function($templateCache) {
   $templateCache.put("core/landing",
-    "<h2>Who's online</h2>");
+    "<md-button class=\"md-raised\" ui-sref=\"players\">Who's online</md-button>");
 }]);
 
 angular.module("core/login/login", []).run(['$templateCache', function($templateCache) {

@@ -2,8 +2,9 @@
   angular
     .module('app', [
       // Shared
-      'app.core'
+      'app.core',
 
       // Feature areas
+      'app.characters'
     ]);
 })();

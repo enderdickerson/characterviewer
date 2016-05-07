@@ -24,6 +24,8 @@ models.sequelize.sync().then(function() {
 // });
 
 function startApp() {
+  var startJobs = require('./jobs/main')();
+
 	var routes = require('./routes');
 	var http = require('http');
 	var path = require('path');

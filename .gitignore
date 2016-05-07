@@ -3,6 +3,8 @@ node_modules
 public/src/vendor
 public/css/*.css
 localdb.js
+remotedb.js
+.idea
 
 */.DS_Store
 */*/.DS_Store

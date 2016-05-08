@@ -7,7 +7,7 @@ angular.module("characters/characterdetail", []).run(['$templateCache', function
 
 angular.module("characters/characters", []).run(['$templateCache', function($templateCache) {
   $templateCache.put("characters/characters",
-    "<div layout=\"row\" layout-md=\"column\"><div flex style=\"margin-right: 8px\"><md-virtual-repeat-container id=\"vertical-container\" class=\"character-repeater\"><div md-virtual-repeat=\"character in vm.characters\" flex><md-card class=\"md-whiteframe-1dp clickable click-hover\" ng-click=\"vm.expandDetail(character)\"><md-card-content><span class=\"md-title\" ng-bind=\"character.name\"></span><md-icon ng-show=\"character.online\" ng-cloak class=\"md-accent md-hue-1 title-icon\">visibility</md-icon></md-card-content></md-card></div></md-virtual-repeat-container></div><div ui-view=\"detail\" flex style=\"margin-left: 8px\"></div></div>");
+    "<div layout-xs=\"column\" layout=\"row\" layout-sm=\"column\" layout-md=\"column\"><div flex style=\"margin-right: 8px\"><md-virtual-repeat-container id=\"vertical-container\" class=\"character-repeater\"><div md-virtual-repeat=\"character in vm.characters\" flex><md-card class=\"md-whiteframe-1dp clickable click-hover\" ng-click=\"vm.expandDetail(character)\"><md-card-content><span class=\"md-title\" ng-bind=\"character.name\"></span><md-icon ng-show=\"character.online\" ng-cloak class=\"md-accent md-hue-1 title-icon\">visibility</md-icon></md-card-content></md-card></div></md-virtual-repeat-container></div><div ui-view=\"detail\" flex style=\"margin-left: 8px\"></div></div>");
 }]);
 
 angular.module("core/admin", []).run(['$templateCache', function($templateCache) {

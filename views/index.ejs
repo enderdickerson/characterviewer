@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <link href="css/site.feabbed.css" rel="stylesheet" type="text/css">
+    <link href="css/site.1b4c9cc.css" rel="stylesheet" type="text/css">
     <base href="/">
   </head>
   <body layout="column" ng-controller="AppCtrl">
@@ -15,7 +15,7 @@
       <nd-nav></nd-nav>
       <div layout="column" flex id="content">
         <md-content layout="column" flex class="md-padding">
-          <div ui-view></div>
+          <div ui-view="content"></div>
         </md-content>
       </div>
     </div>
@@ -42,8 +42,9 @@
     <script src="src/app/core/core.route.js"></script>
     <script src="src/app/core/login/login.route.js"></script>
 
+    <script src="src/app/characters/characterdetail.controller.js"></script>
+    <script src="src/app/characters/characters.controller.js"></script>
     <script src="src/app/characters/characters.service.js"></script>
-    <script src="src/app/characters/players.controller.js"></script>
     <script src="src/app/core/_events.js"></script>
     <script src="src/app/core/adminctrl.js"></script>
     <script src="src/app/core/appctrl.js"></script>

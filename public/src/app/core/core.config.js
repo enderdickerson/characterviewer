@@ -13,6 +13,8 @@
       .primaryPalette('grey', {
         'default': '800'
       })
-      .accentPalette('lime');
+      .accentPalette('red', {
+        'default': '600'
+      });
   }
 })();

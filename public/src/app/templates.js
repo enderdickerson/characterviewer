@@ -1,8 +1,13 @@
-angular.module('templates-main', ['characters/players', 'core/admin', 'core/landing', 'core/login/login', 'core/login/register', 'core/ndnav', 'core/ndtoolbar', 'core/pagenotfound']);
+angular.module('templates-main', ['characters/characterdetail', 'characters/characters', 'core/admin', 'core/landing', 'core/login/login', 'core/login/register', 'core/ndnav', 'core/ndtoolbar', 'core/pagenotfound']);
 
-angular.module("characters/players", []).run(['$templateCache', function($templateCache) {
-  $templateCache.put("characters/players",
-    "<div><div layout=\"row\"><h2>Who's Online</h2><span flex></span><md-button ng-click=\"vm.refresh()\" class=\"md-raised\">Refresh</md-button></div><md-list><md-list-item ng-repeat=\"character in vm.onlineCharacters\"><p ng-bind=\"character.name\"></p></md-list-item></md-list><h2>Who's Offline</h2><md-list><md-list-item ng-repeat=\"character in vm.offlineCharacters\"><p ng-bind=\"character.name\"></p></md-list-item></md-list></div>");
+angular.module("characters/characterdetail", []).run(['$templateCache', function($templateCache) {
+  $templateCache.put("characters/characterdetail",
+    "<div><md-card class=\"character-card\"><md-card-title><span class=\"md-headline\">{{vm.character.name}}</span></md-card-title><md-card-content><p>Level: {{vm.character.level}}</p><p>Race: {{vm.character.race}}</p><p>Class: {{vm.character.class}}</p><p>Gender: {{vm.character.gender === 1 ? 'female' : 'male'}}</p><p>XP: {{vm.character.xp}}</p><p>Money: {{vm.character.money/10000}}g</p><p>Resting: {{vm.character.is_logout_resting === 1 ? 'yes' : 'no'}}</p></md-card-content></md-card></div>");
+}]);
+
+angular.module("characters/characters", []).run(['$templateCache', function($templateCache) {
+  $templateCache.put("characters/characters",
+    "<div layout=\"row\" layout-md=\"column\"><div flex style=\"margin-right: 8px\"><md-virtual-repeat-container id=\"vertical-container\" class=\"character-repeater\"><div md-virtual-repeat=\"character in vm.characters\" flex><md-card class=\"md-whiteframe-1dp clickable click-hover\" ng-click=\"vm.expandDetail(character)\"><md-card-content><span class=\"md-title\" ng-bind=\"character.name\"></span><md-icon ng-show=\"character.online\" ng-cloak class=\"md-accent md-hue-1 title-icon\">visibility</md-icon></md-card-content></md-card></div></md-virtual-repeat-container></div><div ui-view=\"detail\" flex style=\"margin-left: 8px\"></div></div>");
 }]);
 
 angular.module("core/admin", []).run(['$templateCache', function($templateCache) {
@@ -12,7 +17,7 @@ angular.module("core/admin", []).run(['$templateCache', function($templateCache)
 
 angular.module("core/landing", []).run(['$templateCache', function($templateCache) {
   $templateCache.put("core/landing",
-    "<md-button class=\"md-raised\" ui-sref=\"players\">Who's online</md-button>");
+    "");
 }]);
 
 angular.module("core/login/login", []).run(['$templateCache', function($templateCache) {
@@ -27,7 +32,7 @@ angular.module("core/login/register", []).run(['$templateCache', function($templ
 
 angular.module("core/ndnav", []).run(['$templateCache', function($templateCache) {
   $templateCache.put("core/ndnav",
-    "<md-sidenav class=\"md-sidenav-left md-whiteframe-z2\" md-component-id=\"left\"><md-toolbar class=\"md-hue-3\"><div layout layout=\"column\"></div></md-toolbar></md-sidenav>");
+    "<md-sidenav class=\"md-sidenav-left md-whiteframe-z2\" md-component-id=\"left\" md-is-locked-open=\"$mdMedia('gt-md')\"><md-button class=\"sidenav-link\" ng-click=\"vm.goTo('characters')\"><div class=\"inset\"><md-icon>face</md-icon><span class=\"text\">Who's online</span></div></md-button></md-sidenav>");
 }]);
 
 angular.module("core/ndtoolbar", []).run(['$templateCache', function($templateCache) {

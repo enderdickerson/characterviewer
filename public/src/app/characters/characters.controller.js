@@ -1,15 +1,17 @@
 (function() {
-  PlayersCtrl.$inject = ['charactersService'];
+  CharactersCtrl.$inject = ['charactersService', '$state'];
   angular
     .module('app.characters')
-    .controller('PlayersCtrl', PlayersCtrl);
+    .controller('CharactersCtrl', CharactersCtrl);
 
-  function PlayersCtrl(charactersService) {
+  function CharactersCtrl(charactersService, $state) {
     var vm = this;
 
     vm.onlineCharacters = [];
     vm.offlineCharacters = [];
+
     vm.refresh = refresh;
+    vm.expandDetail = expandDetail;
 
     activate();
 
@@ -29,14 +31,17 @@
       charactersService.allOnline().then(function(characters) {
         var sorted = characters.sort(sortByOnline);
 
-        vm.onlineCharacters = sorted.filter(function(item) {
-          return item.online === 1;
+        var onlineToBool = sorted.map(function(item) {
+          item.online = item.online === 1;
+          return item;
         });
 
-        vm.offlineCharacters = sorted.filter(function(item) {
-          return item.online === 0;
-        });
+        vm.characters = onlineToBool;
       });
+    }
+
+    function expandDetail(character) {
+      $state.go('characters.detail', {character: character});
     }
 
     function refresh() {

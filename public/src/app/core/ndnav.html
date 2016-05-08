@@ -1,26 +1,8 @@
-<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
-  <md-toolbar class="md-hue-3">
-    <div layout layout="column">
-      <!-- <h1 class="md-toolbar-tools" hide-gt-md>TCG</h1> -->
-      <!-- <md-icon ng-show="AuthToken.isLoggedIn()" class="md-toolbar-tools material-icons secondary-text">person</md-icon> -->
-      <!--<h3 ng-show="AuthToken.isLoggedIn()" class="md-toolbar-tools">-->
-          <!--{{ AuthToken.currentUser() }}-->
-      <!--</h3>-->
-      <!--<md-button ng-show="AuthToken.isLoggedIn()" ng-click="AuthToken.logout()" class="md-primary md-toolbar-tools">logout</md-button>-->
-      <!--<md-button ng-show="!AuthToken.isLoggedIn()" ng-click="showLogin()" class="md-primary md-toolbar-tools">-->
-        <!--login-->
-      <!--</md-button>-->
-      <!-- <md-button ng-show="!AuthToken.isLoggedIn()" ng-click="toggleLeft()" class="md-primary md-toolbar-tools" ui-sref="register">
-        register
-      </md-button> -->
-      <!-- <a ng-show="!AuthToken.isLoggedIn()" class="secondary-text" ui-sref="login">login</a>
-      <a ng-show="!AuthToken.isLoggedIn()" class="secondary-text" ui-sref="register">register</a> -->
+<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+  <md-button class="sidenav-link" ng-click="vm.goTo('characters')">
+    <div class="inset">
+      <md-icon>face</md-icon>
+      <span class="text">Who's online</span>
     </div>
-  </md-toolbar>
-  <!--<md-button class="sidenav-link" ui-sref="admin" ui-sref-active='active'>-->
-    <!--<div class="inset">-->
-      <!--<md-icon>build</md-icon>-->
-      <!--<span class="text">Admin</span>-->
-    <!--</div>-->
-  <!--</md-button>-->
+  </md-button>
 </md-sidenav>

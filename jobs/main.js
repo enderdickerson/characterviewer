@@ -17,7 +17,7 @@ function updateCharactersFromRemote() {
 
   remote.connect();
 
-  remote.query('SELECT `guid`, `name`, `online` FROM characters', function(err, rows) {
+  remote.query('SELECT * FROM characters', function(err, rows) {
     if (err) {
       console.log(err);
       return;
@@ -32,16 +32,10 @@ function updateCharactersFromRemote() {
 function createOrUpdateCharacter(characterFromRemote) {
   return models.Character.findById(characterFromRemote.guid).then(function(character) {
     if (!character) {
-      return models.Character.create({
-        name: characterFromRemote.name,
-        guid: characterFromRemote.guid,
-        online: characterFromRemote.online
-      });
+      return models.Character.create(characterFromRemote);
     }
     else {
-      character.updateAttributes({
-        online: characterFromRemote.online
-      });
+      character.updateAttributes(characterFromRemote);
     }
   });
 }

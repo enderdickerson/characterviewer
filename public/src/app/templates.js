@@ -2,7 +2,7 @@ angular.module('templates-main', ['characters/characterdetail', 'characters/char
 
 angular.module("characters/characterdetail", []).run(['$templateCache', function($templateCache) {
   $templateCache.put("characters/characterdetail",
-    "<div><md-card class=\"character-card\"><md-card-title><span class=\"md-headline\">{{vm.character.name}}</span></md-card-title><md-card-content><p>Level: {{vm.character.level}}</p><p>Race: {{vm.character.race}}</p><p>Class: {{vm.character.class}}</p><p>Gender: {{vm.character.gender === 1 ? 'female' : 'male'}}</p><p>XP: {{vm.character.xp}}</p><p>Money: {{vm.character.money/10000}}g</p><p>Resting: {{vm.character.is_logout_resting === 1 ? 'yes' : 'no'}}</p></md-card-content></md-card></div>");
+    "<div><md-card class=\"character-card\"><md-card-title><span class=\"md-headline\">{{vm.character.name}}</span></md-card-title><md-card-content><p>Level: {{vm.character.level}}</p><p>Race: {{vm.character.race}}</p><p>Class: {{vm.character.class}}</p><p>Gender: {{vm.character.gender}}</p><p>XP: {{vm.character.xp}}</p><p>Money: {{vm.character.money/10000}}g</p><p>Total time: {{vm.character.totaltime}}</p><p>Time at level: {{vm.character.leveltime}}</p><p>Resting: {{vm.character.is_logout_resting === 1 ? 'yes' : 'no'}}</p></md-card-content></md-card></div>");
 }]);
 
 angular.module("characters/characters", []).run(['$templateCache', function($templateCache) {

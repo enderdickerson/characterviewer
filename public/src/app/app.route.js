@@ -36,6 +36,6 @@
   /* @ngInject */
   function goToErrorPage($injector) {
     var $state = $injector.get('$state');
-    $state.go('error.pagenotfound');
+    $state.go('root.error.pagenotfound');
   }
 })();

@@ -44,7 +44,7 @@ function startApp() {
 	app.use(express.urlencoded());
 	app.use(express.methodOverride());
 
-	app.use(express.static(path.join(__dirname, 'public')));
+	app.use(express.static(path.join(__dirname, '/public')));
 
 	app.use(passport.initialize());
 
@@ -58,16 +58,19 @@ function startApp() {
 	var jwt = require('express-jwt');
 	var auth = jwt({ secret: process.env.JWT_SECRET, userProperty: 'payload' });
 
+	app.param('character', characterStore.character);
+
 	app.get('/', routes.index);
 
   app.get('/data/characters', characterStore.all);
+  app.get('/data/characters/:character', characterStore.getcharacter);
 
 	// app.post('/data/card/remove', auth, authenticate.roles(roles.admin), cardStore.removecard);
 
 	// app.post('/data/register', user.register);
 	// app.post('/data/login', user.login);
 
-	app.get('/*', routes.index);
+  app.get('/*', routes.index);
 
 	http.createServer(app).listen(app.get('port'), function(){
 	  console.log('Express server listening on port ' + app.get('port'));

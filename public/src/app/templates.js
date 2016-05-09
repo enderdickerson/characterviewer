@@ -7,7 +7,7 @@ angular.module("characters/characterdetail", []).run(['$templateCache', function
 
 angular.module("characters/characters", []).run(['$templateCache', function($templateCache) {
   $templateCache.put("characters/characters",
-    "<div layout-xs=\"column\" layout=\"row\" layout-sm=\"column\" layout-md=\"column\"><div flex style=\"margin-right: 8px\"><md-virtual-repeat-container id=\"vertical-container\" class=\"character-repeater\"><div md-virtual-repeat=\"character in vm.characters\" flex><md-card class=\"md-whiteframe-1dp clickable click-hover\" ng-click=\"vm.expandDetail(character)\"><md-card-content><span class=\"md-title\" ng-bind=\"character.name\"></span><md-icon ng-show=\"character.online\" ng-cloak class=\"md-accent md-hue-1 title-icon\">visibility</md-icon></md-card-content></md-card></div></md-virtual-repeat-container></div><div ui-view=\"detail\" flex style=\"margin-left: 8px\"></div></div>");
+    "<div layout-xs=\"column\" layout=\"row\" layout-sm=\"column\" layout-md=\"column\"><div flex style=\"margin-right: 8px\"><md-list><md-list-item ng-repeat=\"character in vm.characters\" class=\"character-list md-2-line\"><md-card class=\"md-whiteframe-1dp clickable click-hover\" ng-click=\"vm.goTo(character.name)\"><md-card-content><span class=\"md-title online-{{character.online}}\" ng-bind=\"character.name\"></span><md-icon ng-show=\"character.online\" ng-cloak class=\"md-accent md-hue-1 title-icon\">visibility</md-icon><p style=\"margin-top: 8px\">{{character.level}} {{character.race}} <span class=\"{{character.class.toLowerCase()}}-class-color\">{{character.class}}</span></p></md-card-content></md-card></md-list-item></md-list></div></div>");
 }]);
 
 angular.module("core/admin", []).run(['$templateCache', function($templateCache) {
@@ -32,12 +32,12 @@ angular.module("core/login/register", []).run(['$templateCache', function($templ
 
 angular.module("core/ndnav", []).run(['$templateCache', function($templateCache) {
   $templateCache.put("core/ndnav",
-    "<md-sidenav class=\"md-sidenav-left md-whiteframe-z2\" md-component-id=\"left\" md-is-locked-open=\"$mdMedia('gt-md')\"><md-button class=\"sidenav-link\" ng-click=\"vm.goTo('characters')\"><div class=\"inset\"><md-icon>face</md-icon><span class=\"text\">Who's online</span></div></md-button></md-sidenav>");
+    "<md-sidenav class=\"md-sidenav-left md-whiteframe-z2\" md-component-id=\"left\" md-is-locked-open=\"$mdMedia('gt-md')\"><md-button class=\"sidenav-link\" ng-click=\"vm.goTo('root.characters')\"><div class=\"inset\"><md-icon>face</md-icon><span class=\"text\">Who's online</span></div></md-button></md-sidenav>");
 }]);
 
 angular.module("core/ndtoolbar", []).run(['$templateCache', function($templateCache) {
   $templateCache.put("core/ndtoolbar",
-    "<md-toolbar layout=\"row\"><div class=\"md-toolbar-tools\"><md-button ng-click=\"toggleLeft()\" class=\"md-icon-button\"><md-icon aria-label=\"Menu\" class=\"material-icons\">menu</md-icon></md-button><h1 id=\"app_title\" class=\"nd-accent\" ui-sref=\"landing\">WoW Viewer</h1><h1>{{ $state.current.data.pageTitle || '' }}</h1><span flex></span></div></md-toolbar>");
+    "<md-toolbar layout=\"row\"><div class=\"md-toolbar-tools\"><md-button ng-click=\"toggleLeft()\" class=\"md-icon-button\"><md-icon aria-label=\"Menu\" class=\"material-icons\">menu</md-icon></md-button><h1 id=\"app_title\" class=\"nd-accent clickable\" ui-sref=\"root.landing\">WoW Viewer</h1><h1>{{ $state.current.data.pageTitle || '' }}</h1><span flex></span></div></md-toolbar>");
 }]);
 
 angular.module("core/pagenotfound", []).run(['$templateCache', function($templateCache) {

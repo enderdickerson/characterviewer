@@ -1,5 +1,6 @@
 (function() {
-  resolveCharacter.$inject = ['$stateParams', '$q'];
+  resolveCharacters.$inject = ['charactersService'];
+  resolveCharacter.$inject = ['$stateParams', 'charactersService'];
   stateConfig.$inject = ['$stateProvider'];
   angular
     .module('app.characters')
@@ -7,7 +8,7 @@
 
   function stateConfig($stateProvider) {
     $stateProvider
-      .state('characters', {
+      .state('root.characters', {
         url: '/characters',
         views: {
           'content@': {
@@ -15,18 +16,22 @@
             controller: 'CharactersCtrl as vm'
           }
         },
+        resolve: {
+          characters: resolveCharacters
+        },
         data: { pageTitle: 'Characters'}
       })
-      .state('characters.detail', {
+      .state('root.characters.detail', {
+        url: '/:charactername',
         views: {
-          'detail@characters': {
+          'content@': {
             templateUrl: 'characters/characterdetail',
             controller: 'CharacterDetailCtrl as vm'
           }
         },
         data: { pageTitle: 'Characters'},
         params: {
-          character: null
+          charactername: null
         },
         resolve: {
           character: resolveCharacter
@@ -34,7 +39,11 @@
       });
   }
 
-  function resolveCharacter($stateParams, $q) {
-    return $q.when($stateParams.character)
+  function resolveCharacters(charactersService) {
+    return charactersService.allOnline();
+  }
+
+  function resolveCharacter($stateParams, charactersService) {
+    return charactersService.get($stateParams.charactername);
   }
 })();

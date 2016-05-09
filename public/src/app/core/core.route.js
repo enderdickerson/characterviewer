@@ -6,21 +6,24 @@
 
   function stateConfig($stateProvider) {
     $stateProvider
-      .state('landing', {
+      .state('root', {
+        abstract: true
+      })
+      .state('root.landing', {
         url: '/',
         templateUrl: 'core/landing',
         data: { pageTitle: ''}
       })
-      .state('admin', {
+      .state('root.admin', {
         url: '/admin',
         templateUrl: 'core/admin',
         controller: 'AdminCtrl',
         data: { pageTitle: 'Admin'}
       })
-      .state('error', {
+      .state('root.error', {
         abstract: true
       })
-      .state('error.pageNotFound', {
+      .state('root.error.pageNotFound', {
         url: '/404',
         templateUrl: 'core/pagenotfound',
         data: { pageTitle: 'Page not found'}

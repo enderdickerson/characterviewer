@@ -1,10 +1,10 @@
 (function() {
-  charactersService.$inject = ['$http'];
+  charactersService.$inject = ['$http', 'moment'];
   angular
     .module('app.characters')
     .service('charactersService', charactersService);
 
-  function charactersService($http) {
+  function charactersService($http, moment) {
     var root = this;
 
     root.allOnline = allOnline;
@@ -41,7 +41,14 @@
       character = getTimeAtLevel(character);
       character = getOnline(character);
       character = getClass(character);
+      character = getLastLogin(character);
+      character = convertCopper(character);
 
+      return character;
+    }
+
+    function getLastLogin(character) {
+      character.lastLogin = moment(character.logout_time, 'X');
       return character;
     }
 
@@ -89,13 +96,32 @@
       return character;
     }
 
+    function convertToHoursMins(time) {
+      var d = moment.duration(angular.copy(time), 'seconds');
+      var hours = Math.floor(d.asHours());
+      var mins = Math.floor(d.asMinutes()) - hours * 60;
+
+      return hours + 'hrs ' + mins + 'mins';
+    }
+
+    function convertCopper(character) {
+      var money = angular.copy(character.money);
+
+      var gold = Math.floor(money/10000);
+      var silver = Math.floor(money/100) - gold * 100;
+      var copper = money - gold * 10000 - silver * 100;
+
+      character.moneyDisplay = gold + 'g ' + silver + 's ' + copper + 'c';
+      return character;
+    }
+
     function getTotalTime(character) {
-      character.totaltime = (character.totaltime/60) + ' minutes';
+      character.totalTimeDisplay = convertToHoursMins(character.totaltime);
       return character;
     }
 
     function getTimeAtLevel(character) {
-      character.leveltime = (character.leveltime/60) + ' minutes';
+      character.timeAtLevelDisplay = convertToHoursMins(character.leveltime);
       return character;
     }
 
@@ -131,11 +157,11 @@
         case 8:
           race = 'Troll';
           break;
-        case 9:
-          race = 'Draenei';
-          break;
         case 10:
           race = 'Blood Elf';
+          break;
+        case 11:
+          race = 'Draenei';
           break;
         default:
           race = 'unknown';

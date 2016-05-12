@@ -5,6 +5,7 @@
       'ngMaterial',
       'ui.router',
       'ngMessages',
+      'angularMoment',
 
       // feature areas
       'app.core.login',

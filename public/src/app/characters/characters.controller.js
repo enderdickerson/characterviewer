@@ -22,11 +22,27 @@
     }
 
     function sortByOnline(a, b) {
-      if (a.online === b.online) {
-        return a.name > b.name ? 1 : a.name < b.name ? -1 : 0;
+      var aOnline = a.online;
+      var bOnline = b.online;
+
+      if (aOnline === bOnline) {
+        var aLogoutTime = a.logout_time;
+        var bLogoutTime = b.logout_time;
+
+        if (aLogoutTime > bLogoutTime) {
+          return -1;
+        }
+
+        if (aLogoutTime < bLogoutTime) {
+          return 1;
+        }
+
+        if (aLogoutTime === bLogoutTime) {
+          return a.name > b.name ? 1 : a.name < b.name ? -1 : 0;
+        }
       }
 
-      return a.online > b.online ? -1 : a.online < b.online ? 1 : 0;
+      return aOnline > bOnline ? -1 : aOnline < bOnline ? 1 : 0;
     }
 
     function goTo(character) {

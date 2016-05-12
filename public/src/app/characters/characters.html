@@ -6,6 +6,7 @@
           <md-card-content>
               <span class="md-title online-{{character.online}}" ng-bind="character.name"></span>
               <md-icon ng-show="character.online" ng-cloak class="md-accent md-hue-1 title-icon">visibility</md-icon>
+              <span class="logout-timestamp" ng-show="!character.online">{{ character.lastLogin.fromNow() }}</span>
             <p style="margin-top: 8px;">
               {{character.level}} {{character.race}}
               <span class="{{character.class.toLowerCase()}}-class-color">{{character.class}}</span>

@@ -9,7 +9,7 @@
   function stateConfig($stateProvider) {
     $stateProvider
       .state('root.characters', {
-        url: '/characters',
+        url: '/',
         views: {
           'content@': {
             templateUrl: 'characters/characters',
@@ -22,7 +22,7 @@
         data: { pageTitle: 'Characters'}
       })
       .state('root.characters.detail', {
-        url: '/:charactername',
+        url: 'characters/:charactername',
         views: {
           'content@': {
             templateUrl: 'characters/characterdetail',

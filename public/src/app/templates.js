@@ -37,7 +37,7 @@ angular.module("core/ndnav", []).run(['$templateCache', function($templateCache)
 
 angular.module("core/ndtoolbar", []).run(['$templateCache', function($templateCache) {
   $templateCache.put("core/ndtoolbar",
-    "<md-toolbar layout=\"row\"><div class=\"md-toolbar-tools\"><md-button ng-click=\"toggleLeft()\" class=\"md-icon-button\"><md-icon aria-label=\"Menu\" class=\"material-icons\">menu</md-icon></md-button><h1 id=\"app_title\" class=\"nd-accent clickable\" ui-sref=\"root.landing\">WoW Viewer</h1><h1>{{ $state.current.data.pageTitle || '' }}</h1><span flex></span></div></md-toolbar>");
+    "<md-toolbar layout=\"row\"><div class=\"md-toolbar-tools\"><md-button ng-click=\"toggleLeft()\" class=\"md-icon-button\"><md-icon aria-label=\"Menu\" class=\"material-icons\">menu</md-icon></md-button><h1 id=\"app_title\" class=\"nd-accent clickable\" ui-sref=\"root.characters\">WoW Viewer</h1><h1>{{ $state.current.data.pageTitle || '' }}</h1><span flex></span></div></md-toolbar>");
 }]);
 
 angular.module("core/pagenotfound", []).run(['$templateCache', function($templateCache) {

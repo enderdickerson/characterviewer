@@ -5,5 +5,8 @@
     "angular-messages": "1.5.5",
     "angular-ui-router": "0.2.18",
     "angular-moment": "^0.10.3"
+  },
+  "resolutions": {
+    "angular": "1.5.5"
   }
 }

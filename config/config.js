@@ -9,6 +9,17 @@ exports.db = function () {
   }
 };
 
+exports.dbOptions = function() {
+  switch (process.env.NODE_ENV) {
+    case 'local':
+      return require('./localdb').options;
+    case 'dev':
+      return require('./devdb').options;
+    default:
+      return 'error';
+  }
+};
+
 exports.remote = function() {
   switch (process.env.NODE_ENV) {
     case 'local':

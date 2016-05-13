@@ -1,11 +1,9 @@
 var fs = require('fs');
 var path = require('path');
 var Sequelize = require('sequelize');
-var config = require('../config');
-var sequelize = new Sequelize(config.db());
+var config = require('../config/config');
+var sequelize = new Sequelize(config.db(), config.dbOptions());
 var db = {};
-
-console.log(config.db());
 
 fs
   .readdirSync(__dirname)

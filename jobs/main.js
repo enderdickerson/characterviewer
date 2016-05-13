@@ -1,6 +1,6 @@
 var schedule = require('node-schedule');
 var mysql = require('mysql');
-var config = require('../config.js');
+var config = require('../config/config.js');
 var models = require('../models');
 
 module.exports = function() {

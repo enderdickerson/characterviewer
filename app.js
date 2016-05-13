@@ -1,51 +1,41 @@
 require('newrelic');
 var express = require('express');
-var config = require('./config');
+var config = require('./config/config');
 var models = require('./models');
+var routes = require('./routes');
+var path = require('path');
+var http = require('http');
+var jobs = require('./jobs/main');
+var morgan = require('morgan');
+var fs = require('fs');
+var errorhandler = require('errorhandler');
+var serveStatic = require('serve-static');
 
 models.sequelize.sync().then(function() {
   startApp();
 });
 
 function startApp() {
-  require('./jobs/main')();
-
-	var routes = require('./routes');
-	var http = require('http');
-	var path = require('path');
-  var characterStore = require('./routes/character');
-
+  jobs();
 	var app = express();
 
-	// all environments
 	app.set('port', process.env.PORT || 3000);
 	app.set('views', path.join(__dirname, 'views'));
 	app.set('view engine', 'ejs');
-	app.use(express.favicon());
-	app.use(express.logger('dev'));
-	app.use(express.json());
-	app.use(express.urlencoded());
-	app.use(express.methodOverride());
-
-	app.use(express.static(path.join(__dirname, '/public')));
-
-	app.use(app.router);
+	app.use(serveStatic(path.join(__dirname, '/public')));
 
 	// development only
 	if ('development' == app.get('env')) {
-	  app.use(express.errorHandler());
+		app.use(errorHandler());
 	}
 
-	app.param('character', characterStore.character);
+	app.use('/', routes);
 
-	app.get('/', routes.index);
+	var logStream = fs.createWriteStream(__dirname + '/errors.log', {flags: 'a'});
 
-  app.get('/data/characters', characterStore.all);
-  app.get('/data/characters/:character', characterStore.getcharacter);
+	app.use(morgan('combined', {stream: logStream}));
 
-  app.get('/*', routes.index);
-
-	http.createServer(app).listen(app.get('port'), function(){
-	  console.log('Express server listening on port ' + app.get('port'));
+	app.listen(app.get('port'), function() {
+		console.log('Express server listening on port ' + app.get('port'));
 	});
 }

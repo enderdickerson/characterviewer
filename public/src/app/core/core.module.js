@@ -7,9 +7,6 @@
       'ngMessages',
       'angularMoment',
 
-      // feature areas
-      'app.core.login',
-
       // local
       'templates-main'
     ]);

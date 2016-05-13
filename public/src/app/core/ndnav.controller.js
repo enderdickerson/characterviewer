@@ -13,7 +13,7 @@
       $state.go(state);
     }
 
-    $scope.$on('$stateChangeSuccess', function(event, toState) {
+    $scope.$on('$stateChangeSuccess', function() {
       $mdSidenav('left').close();
     });
   }

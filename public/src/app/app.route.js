@@ -1,20 +1,10 @@
 (function() {
-  interceptors.$inject = ['$httpProvider'];
   urlProvider.$inject = ['$urlRouterProvider', '$locationProvider'];
   normalizePath.$inject = ['$location'];
   goToErrorPage.$inject = ['$injector'];
   angular
     .module('app')
     .config(urlProvider);
-
-  angular
-    .module('app')
-    .config(interceptors);
-
-  /* @ngInject */
-  function interceptors($httpProvider) {
-    $httpProvider.interceptors.push("AuthInterceptor");
-  }
 
   /* @ngInject */
   function urlProvider($urlRouterProvider, $locationProvider) {

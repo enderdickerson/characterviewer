@@ -1,10 +1,10 @@
 (function() {
-  CharactersCtrl.$inject = ['$state', 'characters', 'socket', 'charactersService'];
+  CharactersCtrl.$inject = ['$scope', '$state', 'characters', 'socket', 'charactersService'];
   angular
     .module('app.characters')
     .controller('CharactersCtrl', CharactersCtrl);
 
-  function CharactersCtrl($state, characters, socket, charactersService) {
+  function CharactersCtrl($scope, $state, characters, socket, charactersService) {
     var vm = this;
 
     vm.characters = [];
@@ -23,6 +23,12 @@
         vm.characters = data.map(function(item) {
           return charactersService.translate(item);
         }).sort(sortByOnline);
+        console.log('added listener');
+      });
+
+      $scope.$on('$destroy', function() {
+      	socket.removeListener('characters:update');
+      	console.log('remove listener');
       });
     }
 

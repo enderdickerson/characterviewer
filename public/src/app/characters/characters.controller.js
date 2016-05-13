@@ -19,11 +19,11 @@
     }
 
     function stream() {
+      console.log('added listener');
       socket.on('characters:update', function(data) {
         vm.characters = data.map(function(item) {
           return charactersService.translate(item);
         }).sort(sortByOnline);
-        console.log('added listener');
       });
 
       $scope.$on('$destroy', function() {

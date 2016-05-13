@@ -1,10 +1,10 @@
 (function() {
-  CharactersCtrl.$inject = ['$state', 'characters'];
+  CharactersCtrl.$inject = ['$state', 'characters', 'socket', 'charactersService'];
   angular
     .module('app.characters')
     .controller('CharactersCtrl', CharactersCtrl);
 
-  function CharactersCtrl($state, characters) {
+  function CharactersCtrl($state, characters, socket, charactersService) {
     var vm = this;
 
     vm.characters = [];
@@ -15,6 +15,15 @@
 
     function activate() {
       sortCharacters();
+      stream();
+    }
+
+    function stream() {
+      socket.on('characters:update', function(data) {
+        vm.characters = data.map(function(item) {
+          return charactersService.translate(item);
+        }).sort(sortByOnline);
+      });
     }
 
     function sortCharacters() {

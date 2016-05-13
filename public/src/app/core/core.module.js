@@ -6,6 +6,7 @@
       'ui.router',
       'ngMessages',
       'angularMoment',
+      'btford.socket-io',
 
       // local
       'templates-main'

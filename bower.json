@@ -1,10 +1,12 @@
 {
   "name": "wowviewer",
   "dependencies": {
+    "socket.io-client": "1.4.6",
     "angular-material": "1.0.5",
     "angular-messages": "1.5.5",
     "angular-ui-router": "0.2.18",
-    "angular-moment": "^0.10.3"
+    "angular-moment": "^0.10.3",
+    "angular-socket-io": "0.7.0"
   },
   "resolutions": {
     "angular": "1.5.5"

@@ -2,14 +2,19 @@ var schedule = require('node-schedule');
 var mysql = require('mysql');
 var config = require('../config/config.js');
 var models = require('../models');
+var io;
 
-module.exports = function() {
-  if (process.env.NODE_ENV !== 'local') {
+exports.run = function() {
+  // if (process.env.NODE_ENV !== 'local') {
     var j = schedule.scheduleJob('*/20 * * * * *', function() {
       console.log('Running character update job');
       updateCharactersFromRemote();
     });
-  }
+  // }
+};
+
+exports.io = function(socket) {
+  io = socket;
 };
 
 function updateCharactersFromRemote() {
@@ -47,5 +52,9 @@ function createOrUpdateCharacters(charactersFromRemote) {
     promises.push(createOrUpdateCharacter(characterFromRemote));
   });
 
-  return models.Sequelize.Promise.all(promises);
+  return models.Sequelize.Promise.all(promises).then(function() {
+    models.Character.findAll({where: {deleteDate: null}}).then(function(characters) {
+      io.emit('characters:update', characters);
+    });
+  });
 }

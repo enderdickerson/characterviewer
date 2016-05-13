@@ -103,7 +103,12 @@ module.exports = function(grunt) {
     wiredep: {
       target: {
         src: 'views/index.ejs',
-        ignorePath: '../public/'
+        ignorePath: '../public/',
+        overrides: {
+          'socket.io-client': {
+            main: 'socket.io.js'
+          }
+        }
       }
     },
     filerev: {

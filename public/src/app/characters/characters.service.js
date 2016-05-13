@@ -9,6 +9,7 @@
 
     root.allOnline = allOnline;
     root.get = get;
+    root.translate = translate;
     
     function get(name) {
       return $http.get('data/characters/' + name).then(function(result) {

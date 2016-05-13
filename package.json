@@ -35,7 +35,8 @@
     "node-schedule": "^1.1.0",
     "path": "^0.12.7",
     "sequelize": "^3.23.0",
-    "serve-static": "^1.10.2"
+    "serve-static": "^1.10.2",
+    "socket.io": "^1.4.6"
   },
   "devDependencies": {
     "karma": "^0.13.22",

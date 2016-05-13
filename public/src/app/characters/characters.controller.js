@@ -19,7 +19,6 @@
     }
 
     function stream() {
-      console.log('added listener');
       socket.on('characters:update', function(data) {
         vm.characters = data.map(function(item) {
           return charactersService.translate(item);
@@ -28,7 +27,6 @@
 
       $scope.$on('$destroy', function() {
       	socket.removeListener('characters:update');
-      	console.log('remove listener');
       });
     }
 

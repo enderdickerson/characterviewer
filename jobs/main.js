@@ -2,15 +2,15 @@ var schedule = require('node-schedule');
 var mysql = require('mysql');
 var config = require('../config/config.js');
 var models = require('../models');
-var io;
+var io = require('../sockets/index');
 
 exports.run = function() {
-  // if (process.env.NODE_ENV !== 'local') {
+  if (process.env.NODE_ENV !== 'local') {
     var j = schedule.scheduleJob('*/20 * * * * *', function() {
       console.log('Running character update job');
       updateCharactersFromRemote();
     });
-  // }
+  }
 };
 
 exports.io = function(socket) {

@@ -10,14 +10,13 @@ var morgan = require('morgan');
 var fs = require('fs');
 var errorhandler = require('errorhandler');
 var serveStatic = require('serve-static');
-var io = require('socket.io');
+var io = require('./sockets/index');
 
 models.sequelize.sync().then(function () {
   startApp();
 });
 
 function startApp() {
-  jobs.run();
   var app = express();
 
   app.set('port', process.env.PORT || 3000);
@@ -41,7 +40,6 @@ function startApp() {
     console.log('Express server listening on port ' + app.get('port'));
   });
 
-  io = io.listen(server);
-
-  require('./sockets/index')(io);
+  jobs.run();
+  io.listen(server);
 }

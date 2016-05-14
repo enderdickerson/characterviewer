@@ -6,6 +6,36 @@
 .character-card
   margin 0
   margin-bottom 8px
+  & .logout-timestamp
+    margin-top 12px
+
+md-progress-linear.no-animation .md-container.md-mode-buffer .md-dashed:before
+  animation none
+
+md-progress-linear[md-mode=buffer].xp-progress
+  height 10px
+  & .md-container
+    height 10px
+    &.md-mode-buffer .md-dashed:before
+      background #eeeeee
+    & .md-bar
+      height 10px
+
+md-progress-linear[md-mode=buffer].xp-progress
+  & .md-container .md-bar2
+    background-color #a335ee
+  & .md-container .md-bar1
+    display none
+  &.rested
+    & .md-container .md-bar2
+      background-color #0070dd
+    & .md-container .md-bar1
+      display inherit
+      background-color lighten(#0070dd, 50%)
+
+
+.equipment-list
+  margin-top 8px
 
 .equipment-card
   margin 0
@@ -21,7 +51,40 @@
   font-size 12px
 
 .equipment-item.q1
-  color #BBBBBB !important
+  color #bbbbbb !important
+
+.equipment-item-no-text
+  width 100%
+  height 100%
+  background-color #bbbbbb
+  & .slot-text
+    color #ffffff
+    width 100%
+    position absolute
+    bottom 0
+    padding-top 4px
+    padding-bottom 4px
+    text-align center
+    font-size 13px
+    background-color rgba(0,0,0,0.34)
+  &.q1
+    background-color #ffffff
+  &.q2
+    background-color #1eff00
+  &.q3
+    background-color #0070dd
+  &.q4
+    background-color #a335ee
+  &.q5
+    background-color #ff8000
+  &.q6,.q7
+    background-color #e5cc80
+  &.q8
+    background-color #0cffff
+  &.q9
+    background-color #71d5ff
+  &.q10
+    background-color #ff4040
 
 md-list-item.character-list
   padding 0

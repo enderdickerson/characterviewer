@@ -1,10 +1,10 @@
 (function() {
-  charactersService.$inject = ['$http', 'moment'];
+  charactersService.$inject = ['$http', 'moment', 'xpService'];
   angular
     .module('app.characters')
     .service('charactersService', charactersService);
 
-  function charactersService($http, moment) {
+  function charactersService($http, moment, xpService) {
     var root = this;
 
     root.allOnline = allOnline;
@@ -45,7 +45,18 @@
       character = getLastLogin(character);
       character = convertCopper(character);
       character = getEquipped(character);
+      character = getXp(character);
 
+      return character;
+    }
+
+    function getXp(character) {
+      var progress = xpService.getProgressPercentage(character.xp, character.rest_bonus, character.level);
+
+      character.xpProgress =  progress.xp;
+      character.restedProgress = progress.rested;
+      character.xpTotal = progress.total;
+      character.xpToLevel = progress.toLevel;
       return character;
     }
 

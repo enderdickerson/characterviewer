@@ -49,7 +49,10 @@
     }
 
     function getLastLogin(character) {
-      character.lastLogin = moment(character.logout_time, 'X');
+      var now = moment();
+      var logoutTime = moment(character.logout_time, 'X');
+
+      character.lastLogin = now < logoutTime ? now : logoutTime;
       return character;
     }
 

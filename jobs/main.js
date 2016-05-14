@@ -5,12 +5,12 @@ var models = require('../models');
 var io = require('../sockets/index');
 
 exports.run = function() {
-  if (process.env.NODE_ENV !== 'local') {
+  // if (process.env.NODE_ENV !== 'local') {
     var j = schedule.scheduleJob('*/20 * * * * *', function() {
       console.log('Running character update job');
       updateCharactersFromRemote();
     });
-  }
+  // }
 };
 
 exports.io = function(socket) {
@@ -53,8 +53,14 @@ function createOrUpdateCharacters(charactersFromRemote) {
   });
 
   return models.Sequelize.Promise.all(promises).then(function() {
-    models.Character.findAll({where: {deleteDate: null}}).then(function(characters) {
-      io.emit('characters:update', characters);
+    var listOfCurrent = charactersFromRemote.map(function(item) {
+      return item.guid;
+    });
+
+    models.Character.destroy({where: {guid: {$notIn: listOfCurrent}}}).then(function() {
+      models.Character.findAll().then(function(characters) {
+        io.emit('characters:update', characters);
+      });
     });
   });
 }

@@ -44,7 +44,55 @@
       character = getClass(character);
       character = getLastLogin(character);
       character = convertCopper(character);
+      character = getEquipped(character);
 
+      return character;
+    }
+
+    function getEquipped(character){
+      var equipped = character.equipmentCache;
+
+      var asList = equipped.split(' ');
+
+      var slots = [
+        {i: 0, slot: 'head'},
+        {i: 2, slot: 'neck'},
+        {i: 4, slot: 'shoulders'},
+        {i: 6, slot: 'shirt'},
+        {i: 8, slot: 'chest'},
+        {i: 10, slot: 'waist'},
+        {i: 12, slot: 'legs'},
+        {i: 14, slot: 'feet'},
+        {i: 16, slot: 'bracers'},
+        {i: 18, slot: 'hands'},
+        {i: 20, slot: 'ring'},
+        {i: 22, slot: 'ring'},
+        {i: 24, slot: 'trinket'},
+        {i: 26, slot: 'trinket'},
+        {i: 28, slot: 'cape'},
+        {i: 30, slot: 'mainhand'},
+        {i: 32, slot: 'offhand'},
+        {i: 34, slot: 'ranged'}
+      ];
+
+      var i = 0,
+        len = asList.length;
+      while(i < len) {
+        if (i % 2 === 0) {
+          var j = 0,
+            length = slots.length;
+          while(j < length) {
+            if (slots[j].i === i) {
+              slots[j].item = asList[i];
+              j = length;
+            }
+            j++;
+          }
+        }
+        i++;
+      }
+
+      character.equipped = slots;
       return character;
     }
 

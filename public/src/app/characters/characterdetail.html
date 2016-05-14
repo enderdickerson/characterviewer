@@ -13,6 +13,11 @@
       <p>Total time: {{vm.character.totalTimeDisplay}}</p>
       <p>Time at level: {{vm.character.timeAtLevelDisplay}}</p>
       <p>Rested: {{vm.character.is_logout_resting === 1 ? 'yes' : 'no'}}</p>
+      <p ng-repeat="item in vm.character.equipped">
+        <span>{{item.slot}}: </span>
+        <a href="//www.wowhead.com/item={{item.item}}" ng-show="item.item !== '0'">[{{item.item}}]</a>
+        <span ng-show="item.item === '0'">nothing</span>
+      </p>
     </md-card-content>
   </md-card>
 </div>

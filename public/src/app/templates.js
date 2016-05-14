@@ -2,7 +2,7 @@ angular.module('templates-main', ['characters/characterdetail', 'characters/char
 
 angular.module("characters/characterdetail", []).run(['$templateCache', function($templateCache) {
   $templateCache.put("characters/characterdetail",
-    "<div><md-card class=\"character-card\"><md-card-title><span class=\"md-headline\">{{vm.character.name}}</span></md-card-title><md-card-content><p>Level: {{vm.character.level}}</p><p>Race: {{vm.character.race}}</p><p>Class: {{vm.character.class}}</p><p>Gender: {{vm.character.gender}}</p><p>XP: {{vm.character.xp}}</p><p>Money: {{vm.character.moneyDisplay}}</p><p>Total time: {{vm.character.totalTimeDisplay}}</p><p>Time at level: {{vm.character.timeAtLevelDisplay}}</p><p>Rested: {{vm.character.is_logout_resting === 1 ? 'yes' : 'no'}}</p></md-card-content></md-card></div>");
+    "<div><md-card class=\"character-card\"><md-card-title><span class=\"md-headline\">{{vm.character.name}}</span></md-card-title><md-card-content><p>Level: {{vm.character.level}}</p><p>Race: {{vm.character.race}}</p><p>Class: {{vm.character.class}}</p><p>Gender: {{vm.character.gender}}</p><p>XP: {{vm.character.xp}}</p><p>Money: {{vm.character.moneyDisplay}}</p><p>Total time: {{vm.character.totalTimeDisplay}}</p><p>Time at level: {{vm.character.timeAtLevelDisplay}}</p><p>Rested: {{vm.character.is_logout_resting === 1 ? 'yes' : 'no'}}</p><p ng-repeat=\"item in vm.character.equipped\"><span>{{item.slot}}:</span> <a href=\"//www.wowhead.com/item={{item.item}}\" ng-show=\"item.item !== '0'\">[{{item.item}}]</a> <span ng-show=\"item.item === '0'\">nothing</span></p></md-card-content></md-card></div>");
 }]);
 
 angular.module("characters/characters", []).run(['$templateCache', function($templateCache) {

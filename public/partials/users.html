@@ -1,0 +1,15 @@
+<div layout layout="row" layout-align="center">
+<md-content flex="60">
+  <md-card>
+    <md-list>
+      <span ng-repeat="user in users">
+        <md-list-item ng-click="$state.go('users.edit', { 'userId': user._id })">
+          <p class="md-body-1">{{ user.username }}</p>
+        </md-list-item>
+        <md-divider ng-if="!$last"></md-divider>
+      </span>
+    </md-list>
+  </md-card>
+</md-content>
+<div ui-view="detail"></div>
+</div>

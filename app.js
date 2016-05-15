@@ -45,6 +45,7 @@ function startApp() {
 	var routes = require('./routes');
 	var cardStore = require('./routes/cardstore');
 	var abilityStore = require('./routes/abilitystore');
+	var userStore = require('./routes/userstore');
 	var user = require('./routes/user');
 	var http = require('http');
 	var path = require('path');
@@ -82,6 +83,7 @@ function startApp() {
 	// app.get('/*', routes.index);
 	app.param('card', cardStore.card);
 	app.param('ability', abilityStore.ability);
+	app.param('user', userStore.user);
 
 	app.get('/', routes.index);
 
@@ -94,6 +96,9 @@ function startApp() {
 	app.post('/data/ability', auth, authenticate.roles(roles.admin), abilityStore.addability);
 	app.post('/data/ability/remove', auth, authenticate.roles(roles.admin), abilityStore.removeability);
 	app.get('/data/abilities/:ability', auth, abilityStore.getability);
+
+	app.get('/data/users', auth, authenticate.roles(roles.admin), userStore.users);
+	app.get('/data/users/:user', auth, authenticate.roles(roles.admin), userStore.getuser);
 
 	app.post('/data/register', user.register);
 	app.post('/data/login', user.login);

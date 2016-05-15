@@ -36,13 +36,13 @@ angular.module('tcgApp')
       url: '/admin',
       templateUrl: 'partials/admin.html',
       controller: 'AdminCtrl',
-      data: { pageTitle: 'Admin'}
+      data: { pageTitle: 'Admin' }
     })
     .state('cards', {
       url: '/cards',
       templateUrl: 'partials/cards.html',
       controller: 'CardListCtrl',
-      data: { pageTitle: 'Cards'}
+      data: { pageTitle: 'Cards' }
     })
     .state('cards.edit', {
       url: '/:cardId',
@@ -52,13 +52,38 @@ angular.module('tcgApp')
           controller: 'CardCtrl'
         }
       },
-      // templateUrl: 'partials/card.html',
       resolve: {
         data: ['$stateParams', 'CardService', function($stateParams, CardService) {
           return $stateParams.cardId ? CardService.get($stateParams.cardId) : {};
         }]
       },
-      data: { pageTitle: 'Card detail'}
+      data: { pageTitle: 'Card detail' }
+    })
+    .state('users', {
+      url: '/users',
+      templateUrl: 'partials/users.html',
+      controller: 'UserListCtrl',
+      resolve: {
+        data: ['UserService', function(UserService) {
+          return UserService.all();
+        }]
+      },
+      data: { pageTitle: 'Users' }
+    })
+    .state('users.edit', {
+      url: '/:userId',
+      views: {
+        'detail@users': {
+          templateUrl: 'partials/user.html',
+          controller: 'UserCtrl'
+        }
+      },
+      resolve: {
+        data: ['$stateParams', 'UserService', function($stateParams, UserService) {
+          return $stateParams.userId ? UserService.get($stateParams.userId) : {};
+        }]
+      },
+      data: { pageTitle: 'User detail' }
     })
     .state('viewabilities', {
       url: '/abilitylist',
